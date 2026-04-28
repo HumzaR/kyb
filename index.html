@@ -35,6 +35,7 @@ body{background:radial-gradient(circle at 10% 0%,#dbeafe,transparent 32%),radial
       <a href="#journey">End-to-end demo</a>
       <a href="#unhappy">Unhappy paths</a>
       <a href="#output">Platform output</a>
+      <a href="#integrations">Integrations</a>
       <a href="#build">Build</a>
     </nav>
   </div>
@@ -45,7 +46,7 @@ body{background:radial-gradient(circle at 10% 0%,#dbeafe,transparent 32%),radial
     <div>
       <div class="mb-5 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">Heron take-home interactive prototype</div>
       <h1 class="max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">From uploaded documents to clean KYB data in one workflow.</h1>
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">A platform for fintechs that analyses business onboarding documents directly. It guides customers on what to upload, catches bad documents before submission, extracts and translates key data, verifies against official sources, creates CRM-ready fields, and packages everything into an analyst review case.</p>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">A platform built for startup fintechs with limited tech resources. It analyses business onboarding documents directly, guides customers on what to upload, catches bad documents before submission, extracts and translates key data, verifies against official sources, creates CRM-ready fields, and packages everything into an analyst review case without requiring a large internal engineering build-out.</p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="#journey" class="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800">Run end-to-end demo</a>
         <button onclick="runFullDemo()" class="rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 hover:bg-slate-100">Auto-run platform</button>
@@ -145,6 +146,33 @@ body{background:radial-gradient(circle at 10% 0%,#dbeafe,transparent 32%),radial
     </div>
   </section>
 
+  <section id="startup" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="grid gap-6 lg:grid-cols-[1fr_.95fr]">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-600">Who this is for</div>
+          <h2 class="mt-4 text-3xl font-black">Built for startup fintechs with lean teams</h2>
+          <p class="mt-3 text-slate-600 leading-7">This product is designed for fintechs that need robust business onboarding checks but do not have the time or technical resources to build a full document-processing stack themselves.</p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Lean engineering teams</b><p class="mt-1 text-sm text-slate-600">No need to build OCR, rules engines, verification connectors and case tooling from scratch.</p></div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Operations under pressure</b><p class="mt-1 text-sm text-slate-600">Reduces customer chasing and manual review by catching issues earlier in the flow.</p></div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Fast time to launch</b><p class="mt-1 text-sm text-slate-600">Helps a startup launch a more credible KYB process without a long platform build.</p></div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Configurable controls</b><p class="mt-1 text-sm text-slate-600">Document rules, review thresholds and routing can be tailored without heavy custom development.</p></div>
+          </div>
+        </div>
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <h3 class="text-2xl font-black">Why this matters for a startup fintech</h3>
+          <div class="mt-5 space-y-3 text-sm">
+            <div class="rounded-2xl bg-white/10 p-4">✓ Avoid building and maintaining multiple point solutions internally</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Give ops teams a clean review workflow earlier in the company journey</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Create structured CRM-ready data without custom schema work every time</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Support growth into new countries and document types with configurable rules</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="output" class="bg-white/85 py-14">
     <div class="mx-auto max-w-7xl px-6">
       <div class="mb-8 max-w-3xl">
@@ -174,6 +202,45 @@ body{background:radial-gradient(circle at 10% 0%,#dbeafe,transparent 32%),radial
             <div class="rounded-2xl bg-white/10 p-4">✓ Better analyst confidence</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="integrations" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-8 max-w-3xl">
+        <h2 class="text-3xl font-black">Native integrations for the systems startups already use</h2>
+        <p class="mt-3 text-slate-600">To work for lean fintech teams, the product should not stop at document analysis. It should push clean, structured outputs into the tools they already rely on for onboarding and operations.</p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 font-black text-blue-700">SF</div>
+          <h3 class="mt-4 text-lg font-black">Salesforce</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Create or update account, contact and case records with extracted company and ownership data.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: onboard larger B2B teams already running on Salesforce.</div>
+        </div>
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 font-black text-orange-700">HS</div>
+          <h3 class="mt-4 text-lg font-black">HubSpot</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Map extracted data into companies, contacts, tickets and custom properties for lean go-to-market and ops teams.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: startup fintechs using HubSpot as their CRM and workflow hub.</div>
+        </div>
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 font-black text-emerald-700">PD</div>
+          <h3 class="mt-4 text-lg font-black">Pipedrive</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Sync approved business details into people, organisations and deal workflows for smaller commercial teams.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: early-stage fintechs with lighter-weight sales and onboarding tooling.</div>
+        </div>
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 font-black text-violet-700">API</div>
+          <h3 class="mt-4 text-lg font-black">API and webhook layer</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">For customers with custom stacks, the same outputs can be delivered through APIs and event-based webhooks.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: grow from no-code integrations to deeper platform integration over time.</div>
+        </div>
+      </div>
+      <div class="mt-6 rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+        <h3 class="text-xl font-black">Integration value</h3>
+        <p class="mt-3 text-sm leading-6 text-slate-300">The product becomes more valuable when startups do not have to manually re-enter extracted data. Native integrations make the output immediately operational in the CRM systems where their teams already work.</p>
       </div>
     </div>
   </section>
