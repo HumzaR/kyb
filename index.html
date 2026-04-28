@@ -3,125 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM Case Study: Workflow Automation</title>
+    <title>PM Task | Workflow Automation Solution</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .active-tab { border-bottom: 3px solid #2563eb; color: #2563eb; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased">
+<body class="bg-slate-50 text-slate-900">
 
-    <header class="bg-white border-b border-slate-200 py-12">
-        <div class="max-w-4xl mx-auto px-6">
-            <span class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Product Manager Take-Home Task</span>
-            <h1 class="text-4xl font-bold mt-2 text-slate-900">Project "Instant-Risk": Automating Financial Underwriting</h1>
-            <p class="mt-4 text-xl text-slate-600 leading-relaxed">Reducing "Time to Decision" from 4 hours to 4 minutes by automating bank statement enrichment.</p>
+    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+        <div class="max-w-4xl mx-auto flex justify-center">
+            <button onclick="showTab('readme')" id="readme-tab" class="px-8 py-4 font-bold text-sm uppercase tracking-widest active-tab hover:text-blue-600 transition">
+                📂 Internal Readme (The Thinking)
+            </button>
+            <button onclick="showTab('pitch')" id="pitch-tab" class="px-8 py-4 font-bold text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition">
+                🚀 Product Pitch (The Demo)
+            </button>
         </div>
-    </header>
+    </nav>
 
-    <main class="max-w-4xl mx-auto px-6 py-12">
+    <main id="readme" class="tab-content active max-w-4xl mx-auto px-6 py-12">
+        <header class="mb-12">
+            <h1 class="text-3xl font-extrabold text-slate-900">Task Strategy & Context</h1>
+            <p class="text-slate-600 mt-2">The "Behind-the-Scenes" on the workflow selection and technical pragmatism.</p>
+        </header>
 
-        <section class="mb-16">
-            <h2 class="text-2xl font-bold mb-4 flex items-center">
-                <span class="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">01</span>
-                My Role & Context
-            </h2>
-            <div class="prose prose-slate max-w-none text-lg leading-relaxed text-slate-700">
-                <p>
-                    I worked as a **Product Manager** at a high-growth Fintech lender specializing in Merchant Cash Advances. My team was responsible for the "Ingestion-to-Risk" funnel. We sat between the Sales team (who wanted instant approvals) and the Credit Risk team (who required meticulous accuracy).
+        <section class="space-y-10">
+            <div>
+                <h3 class="text-lg font-bold text-blue-600 uppercase mb-2">01. My Role & Context</h3>
+                <p class="text-slate-700 leading-relaxed">
+                    In my previous role as a **Product Manager** at a commercial fintech, I oversaw the credit-decisioning engine. I observed that our biggest friction point wasn't the algorithm—it was the **unstructured data entry** performed by junior underwriters before the algorithm could even run.
                 </p>
             </div>
-        </section>
 
-        <hr class="border-slate-200 mb-16">
-
-        <section class="mb-16">
-            <h2 class="text-2xl font-bold mb-4 flex items-center text-slate-900">
-                <span class="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">02</span>
-                The Workflow: The "Stare and Compare"
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-8 mt-6">
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <h3 class="font-bold text-slate-900 mb-2">The Process</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        When a small business applies for a loan, they upload 6 months of bank statements. A human Underwriter opens every PDF and manually identifies which deposits are <strong>actual revenue</strong> and which are just transfers or loans.
-                    </p>
-                </div>
-                <div class="bg-red-50 p-6 rounded-xl border border-red-100 shadow-sm">
-                    <h3 class="font-bold text-red-900 mb-2">The Pain & Cost</h3>
-                    <p class="text-red-800 text-sm leading-relaxed">
-                        Underwriters spend 70% of their day doing basic math in Excel. This creates a "bottleneck" where borrowers wait 48 hours for a decision. In fintech, <strong>speed is a feature</strong>; by the time we approve them, they've often signed with a faster competitor.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <hr class="border-slate-200 mb-16">
-
-        <section class="mb-16 bg-blue-900 text-white p-8 rounded-2xl shadow-xl">
-            <h2 class="text-2xl font-bold mb-6">Internal Pitch: The "Instant-Risk" Engine</h2>
-            
-            <div class="space-y-6">
-                <p class="text-blue-100 text-lg">
-                    "Team, we are building a solution that transforms bank statements from <strong>flat images</strong> into <strong>actionable risk signals</strong> automatically."
+            <div class="bg-white p-6 rounded-xl border border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900 mb-2">02. The Workflow: "Manual Covenant Tracking"</h3>
+                <p class="text-slate-600 text-sm mb-4 italic">Layperson explanation:</p>
+                <p class="text-slate-700 leading-relaxed">
+                    When a bank lends money, they set rules (covenants) like "You must always have more cash than debt." Currently, a human must manually download 12 months of bank statements, find the revenue lines in a 50-page PDF, and type them into Excel to see if the rules were broken. 
                 </p>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-800/50 p-4 rounded-lg border border-blue-700">
-                        <h4 class="font-bold mb-2">1. Intelligent Ingestion</h4>
-                        <p class="text-xs text-blue-200">OCR layer that normalizes varied bank formats (Chase, Wells Fargo, etc.) into a unified JSON schema.</p>
-                    </div>
-                    <div class="bg-blue-800/50 p-4 rounded-lg border border-blue-700">
-                        <h4 class="font-bold mb-2">2. Transaction Tagging</h4>
-                        <p class="text-xs text-blue-200">A ML classifier that flags 'Lender-to-Lender' transfers to prevent us from funding a business that's already over-leveraged.</p>
-                    </div>
-                    <div class="bg-blue-800/50 p-4 rounded-lg border border-blue-700">
-                        <h4 class="font-bold mb-2">3. Confidence UI</h4>
-                        <p class="text-xs text-blue-200">A 'Human-in-the-loop' dashboard where underwriters only review transactions the AI is < 90% sure about.</p>
-                    </div>
+                <div class="mt-4 p-4 bg-red-50 border-l-4 border-red-400 text-red-800 text-sm">
+                    <strong>The Pain:</strong> It takes 3 hours per loan. With 1,000 loans, that’s 3,000 hours of high-risk manual labor where a single typo could hide a multi-million dollar default.
                 </div>
             </div>
-        </section>
 
-        <section class="mb-16">
-            <h2 class="text-2xl font-bold mb-6 text-slate-900">Implementation Pragmatism</h2>
-            <div class="bg-slate-100 rounded-xl overflow-hidden border border-slate-200">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-slate-200 text-slate-700 uppercase text-xs font-bold">
-                        <tr>
-                            <th class="px-6 py-4">Component</th>
-                            <th class="px-6 py-4">Technical Requirement</th>
-                            <th class="px-6 py-4">MVP Approach</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-200">
-                        <tr>
-                            <td class="px-6 py-4 font-semibold">Data Extraction</td>
-                            <td class="px-6 py-4">OCR & Key-Value Pair extraction.</td>
-                            <td class="px-6 py-4">Leverage 3rd party APIs (like Heron or AWS Textract) to avoid building OCR from scratch.</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 font-semibold">Classification</td>
-                            <td class="px-6 py-4">NLP categorization for transaction descriptions.</td>
-                            <td class="px-6 py-4">Regex for top 20 common patterns + LLM for long-tail "messy" descriptions.</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 font-semibold">Risk Engine</td>
-                            <td class="px-6 py-4">Automated calculation of DSCR and Net Monthly Revenue.</td>
-                            <td class="px-6 py-4">Centralized Python rules engine to ensure math parity between AI and Analysts.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div>
+                <h3 class="text-lg font-bold text-slate-900 mb-4">03. Technical Pragmatism</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="bg-slate-200 px-2 py-1 rounded text-xs font-mono mr-3">Ingestion</span>
+                        <p class="text-sm text-slate-600">Utilizing OCR (Amazon Textract/Azure) to flatten PDFs, but adding a <strong>Coordination Layer</strong> to handle bank-specific formatting variations.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-slate-200 px-2 py-1 rounded text-xs font-mono mr-3">Intelligence</span>
+                        <p class="text-sm text-slate-600">Using an LLM (GPT-4o) with a defined JSON schema to perform <strong>Entity Extraction</strong> (identifying "Total Revenue" vs "Tax Returns").</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-slate-200 px-2 py-1 rounded text-xs font-mono mr-3">Validation</span>
+                        <p class="text-sm text-slate-600">A simple Python rules-engine calculates the ratios. No "AI black box" here—the math must be deterministic for legal compliance.</p>
+                    </li>
+                </ul>
             </div>
         </section>
-
-        <footer class="text-center bg-slate-200 rounded-xl p-8">
-            <h3 class="font-bold text-slate-900 mb-2">The "North Star" Metric</h3>
-            <p class="text-slate-600 italic">"Success isn't 100% automation. Success is a 50% reduction in 'Time-to-Touch' while maintaining a 0.1% error rate."</p>
-        </footer>
-
     </main>
+
+    <main id="pitch" class="tab-content max-w-5xl mx-auto px-6 py-12">
+        <div class="bg-blue-600 rounded-3xl p-12 text-center text-white mb-12 shadow-2xl">
+            <h2 class="text-4xl font-black mb-4 tracking-tight">Project Watchtower</h2>
+            <p class="text-xl text-blue-100 max-w-2xl mx-auto font-light">Stop chasing bank statements. Start managing risk in real-time.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">The Solution: Intelligent Ingestion</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">
+                    Watchtower automates the extraction and validation of financial covenants directly from borrower-provided documents. We turn a 3-hour manual audit into a 30-second automated check.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <div class="bg-blue-100 p-2 rounded-full mr-4">🚀</div>
+                        <span class="font-semibold">90% faster Time-to-Decision</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <div class="bg-green-100 p-2 rounded-full mr-4">🎯</div>
+                        <span class="font-semibold">Elimination of Data Entry Errors</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-slate-900 rounded-2xl p-6 shadow-xl text-white font-mono text-sm leading-relaxed">
+                <p class="text-blue-400">// API Response Sample</p>
+                <p class="text-slate-400 mt-2">{</p>
+                <p class="ml-4 italic text-slate-500">"status": "Covenant_Breach_Alert",</p>
+                <p class="ml-4 text-green-400">"extracted_ebitda": 1450000.00,</p>
+                <p class="ml-4 text-green-400">"total_debt": 5200000.00,</p>
+                <p class="ml-4 text-yellow-400">"debt_to_ebitda_ratio": 3.58,</p>
+                <p class="ml-4 text-red-500">"threshold": 3.0,</p>
+                <p class="ml-4 text-red-500">"action_required": true</p>
+                <p class="text-slate-400">}</p>
+            </div>
+        </div>
+
+        <div class="border-t border-slate-200 pt-12">
+            <h3 class="text-center text-xl font-bold text-slate-900 mb-8 uppercase tracking-widest text-sm">How it Works</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="text-3xl mb-4">📥</div>
+                    <h4 class="font-bold mb-2">Ingest</h4>
+                    <p class="text-slate-500 text-sm">Drop PDF bank statements into our secure portal or connect via API.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl mb-4">🧠</div>
+                    <h4 class="font-bold mb-2">Extract</h4>
+                    <p class="text-slate-500 text-sm">Our AI identifies key-value pairs regardless of document format.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl mb-4">⚡</div>
+                    <h4 class="font-bold mb-2">Alert</h4>
+                    <p class="text-slate-500 text-sm">Real-time alerts triggered if borrower ratios fall outside of legal bounds.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Remove active style from tabs
+            document.querySelectorAll('nav button').forEach(button => {
+                button.classList.remove('active-tab');
+                button.classList.add('text-slate-500');
+            });
+
+            // Show current tab
+            document.getElementById(tabName).classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active-tab');
+            document.getElementById(tabName + '-tab').classList.remove('text-slate-500');
+        }
+    </script>
 </body>
 </html>
