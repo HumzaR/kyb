@@ -1,340 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PM Case Study | KYB Workflow Automation</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
-        
-        /* Unified Styles */
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .active-btn { background-color: #0f172a; color: white; }
-
-        /* Demo Specific Animations & Styles */
-        .grid-bg { background-image: linear-gradient(rgba(15,23,42,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.045) 1px,transparent 1px); background-size: 30px 30px; }
-        .glass { background: rgba(255,255,255,.82); backdrop-filter: blur(18px); }
-        .slide { animation: slide .32s ease-out both; }
-        @keyframes slide { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .scan { animation: scan 2.4s ease-in-out infinite; }
-        @keyframes scan { 0% { transform: translateY(0); opacity: .12; } 45% { opacity: 1; } 100% { transform: translateY(270px); opacity: .12; } }
-        .progress { transition: width .55s ease; }
-        .path-line:after { content: ''; position: absolute; left: 50%; top: 100%; height: 24px; border-left: 2px dashed #cbd5e1; }
-        .path-line:last-child:after { display: none; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KYB Document Intelligence Demo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,#dbeafe,transparent 32%),radial-gradient(circle at 95% 10%,#dcfce7,transparent 28%),#f8fafc}
+.grid-bg{background-image:linear-gradient(rgba(15,23,42,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.045) 1px,transparent 1px);background-size:30px 30px}
+.glass{background:rgba(255,255,255,.82);backdrop-filter:blur(18px)}
+.slide{animation:slide .32s ease-out both}
+@keyframes slide{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.float{animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.scan{animation:scan 2.4s ease-in-out infinite}
+@keyframes scan{0%{transform:translateY(0);opacity:.12}45%{opacity:1}100%{transform:translateY(270px);opacity:.12}}
+.progress{transition:width .55s ease}
+.path-line:after{content:'';position:absolute;left:50%;top:100%;height:24px;border-left:2px dashed #cbd5e1}
+.path-line:last-child:after{display:none}
+</style>
 </head>
 <body class="min-h-screen text-slate-900 grid-bg">
-
-    <nav class="sticky top-0 z-[100] bg-white/90 backdrop-blur border-b border-slate-200">
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <div class="flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 text-white font-black">K</div>
-                <div class="hidden sm:block">
-                    <p class="font-black leading-tight text-sm uppercase">KYB Document Intelligence</p>
-                    <p class="text-[10px] text-slate-500 uppercase tracking-widest">PM Interview Take-Home</p>
-                </div>
-            </div>
-            
-            <div class="inline-flex rounded-xl border border-slate-200 p-1 bg-slate-100">
-                <button onclick="toggleView('readme')" id="btn-readme" class="px-4 py-2 rounded-lg text-xs font-bold transition-all active-btn">
-                    📂 INTERNAL README
-                </button>
-                <button onclick="toggleView('pitch')" id="btn-pitch" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-500 transition-all">
-                    🚀 PRODUCT PITCH & DEMO
-                </button>
-            </div>
-        </div>
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <div class="flex items-center gap-3">
+      <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white font-black">K</div>
+      <div>
+        <p class="font-black leading-tight">KYB Document Intelligence</p>
+        <p class="text-xs text-slate-500">End-to-end business document analysis platform</p>
+      </div>
+    </div>
+    <nav class="hidden gap-6 text-sm font-semibold text-slate-600 md:flex">
+      <a href="#pitch">Pitch</a>
+      <a href="#journey">End-to-end demo</a>
+      <a href="#unhappy">Unhappy paths</a>
+      <a href="#output">Platform output</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#build">Build</a>
     </nav>
+  </div>
+</header>
 
-    <main id="readme" class="tab-content active max-w-4xl mx-auto px-6 py-16">
-        <header class="mb-12">
-            <h1 class="text-5xl font-black text-slate-900 tracking-tight mb-4">Workflow Design Strategy</h1>
-            <p class="text-xl text-slate-600 leading-relaxed font-light">An analysis of why we should build a document intelligence platform for KYB automation.</p>
-        </header>
+<main>
+  <section class="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1fr_.95fr] lg:items-center">
+    <div>
+      <div class="mb-5 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">Heron take-home interactive prototype</div>
+      <h1 class="max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">From uploaded documents to clean KYB data in one workflow.</h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">A platform built for startup fintechs with limited tech resources. It analyses business onboarding documents directly, guides customers on what to upload, catches bad documents before submission, extracts and translates key data, verifies against official sources, creates CRM-ready fields, and packages everything into an analyst review case without requiring a large internal engineering build-out.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#journey" class="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800">Run end-to-end demo</a>
+        <button onclick="runFullDemo()" class="rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 hover:bg-slate-100">Auto-run platform</button>
+      </div>
+    </div>
 
-        <div class="space-y-16">
-            <section>
-                <h3 class="text-sm font-black text-blue-600 uppercase tracking-widest mb-4">01. Context & Observed Workflow</h3>
-                <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed">
-                    <p class="mb-4">
-                        In previous fintech environments, the "Know Your Business" (KYB) process is often the most significant friction point in a B2B user's journey. I observed a workflow where underwriters manually reviewed hundreds of PDFs (Certificates of Incorporation, UBO registers, IDs) to find consistent data.
-                    </p>
-                    <p>
-                        The "Stare and Compare" method was standard: looking at a registry extract on one screen and the customer's uploaded document on another to find a mismatch.
-                    </p>
-                </div>
-            </section>
-
-            <section class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm">
-                    <h4 class="font-bold text-slate-900 mb-3">The "Analyst Burden"</h4>
-                    <p class="text-sm text-slate-600">60% of an analyst's day was spent on low-value data entry and document cleanup. This delayed high-value risk assessments and led to operational burnout.</p>
-                </div>
-                <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm">
-                    <h4 class="font-bold text-slate-900 mb-3">The "Chasing Loop"</h4>
-                    <p class="text-sm text-slate-600">If a document was blurry or wrong, the analyst found it 2 days later. The customer then had to be emailed, starting a cycle of friction that killed conversion rates.</p>
-                </div>
-            </section>
-
-            <section>
-                <h3 class="text-sm font-black text-blue-600 uppercase tracking-widest mb-6">02. Technical Implementation & Pragmatism</h3>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-slate-950 p-6 rounded-2xl text-white">
-                        <span class="text-xs font-mono text-slate-400">Phase A</span>
-                        <h5 class="font-bold mt-2">Upstream Validation</h5>
-                        <p class="text-xs text-slate-400 mt-2">Moving the quality check to the frontend. If it's a bank statement instead of a utility bill, the AI catches it before it hits the backend.</p>
-                    </div>
-                    <div class="bg-slate-950 p-6 rounded-2xl text-white">
-                        <span class="text-xs font-mono text-slate-400">Phase B</span>
-                        <h5 class="font-bold mt-2">LLM Extraction</h5>
-                        <p class="text-xs text-slate-400 mt-2">Mapping messy fields (Entity Name, Tax ID, UBO %) into a structured JSON schema using OCR + LLM context awareness.</p>
-                    </div>
-                    <div class="bg-slate-950 p-6 rounded-2xl text-white">
-                        <span class="text-xs font-mono text-slate-400">Phase C</span>
-                        <h5 class="font-bold mt-2">Evidence Pack</h5>
-                        <p class="text-xs text-slate-400 mt-2">Not a "black box." The platform provides the specific page/paragraph source for every value to build analyst trust.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="bg-blue-600 p-10 rounded-[3rem] text-white">
-                <h3 class="text-2xl font-black mb-4">Strategic Impact</h3>
-                <p class="text-blue-100 mb-6">By automating the document-to-structured-data bridge, we solve for three stakeholders:</p>
-                <ul class="space-y-4">
-                    <li class="flex items-center gap-3">
-                        <div class="h-6 w-6 rounded-full bg-blue-400 flex items-center justify-center text-xs">1</div>
-                        <span><strong>The Customer:</strong> Instant feedback and faster onboarding.</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="h-6 w-6 rounded-full bg-blue-400 flex items-center justify-center text-xs">2</div>
-                        <span><strong>The Analyst:</strong> Focus shifts from entry to decision-making.</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="h-6 w-6 rounded-full bg-blue-400 flex items-center justify-center text-xs">3</div>
-                        <span><strong>The Business:</strong> Scales volume without linear headcount growth.</span>
-                    </li>
-                </ul>
-            </section>
+    <div class="glass rounded-[2rem] border border-slate-200 p-5 shadow-xl">
+      <div class="rounded-[1.5rem] bg-slate-950 p-5 text-white">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-slate-300">Current case</p>
+            <p class="text-2xl font-black">Northstar Pay Ltd</p>
+          </div>
+          <span class="rounded-full bg-cyan-400/20 px-3 py-1 text-xs font-black text-cyan-200">Processing</span>
         </div>
-    </main>
+        <div class="relative mt-5 h-80 overflow-hidden rounded-2xl bg-white p-5 text-slate-900 shadow-inner">
+          <div class="absolute left-0 right-0 top-0 h-1 bg-cyan-400 scan shadow-[0_0_18px_#22d3ee]"></div>
+          <div class="space-y-3 text-xs">
+            <div class="h-4 w-2/3 rounded bg-slate-300"></div>
+            <div class="h-3 w-full rounded bg-slate-200"></div>
+            <div class="h-3 w-11/12 rounded bg-slate-200"></div>
+            <div class="mt-5 grid grid-cols-2 gap-3">
+              <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-3"><b>Extracted</b><br>17 fields</div>
+              <div class="rounded-xl border border-blue-200 bg-blue-50 p-3"><b>Translated</b><br>1 document</div>
+              <div class="rounded-xl border border-amber-200 bg-amber-50 p-3"><b>Review</b><br>2 exceptions</div>
+              <div class="rounded-xl border border-purple-200 bg-purple-50 p-3"><b>CRM</b><br>8 fields mapped</div>
+            </div>
+            <div class="mt-6 rounded-xl bg-slate-100 p-3">The analyst can see exactly which document, page and field produced each value.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <main id="pitch" class="tab-content">
-        <section class="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1fr_.95fr] lg:items-center">
+
+  <section id="pitch" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-8 max-w-4xl">
+        <div class="inline-flex rounded-full bg-slate-950 px-3 py-1 text-xs font-black text-white">Product / engineering pitch</div>
+        <h2 class="mt-4 text-3xl font-black">Why we should build this workflow automation</h2>
+        <p class="mt-3 text-slate-600 leading-7">This section frames the prototype against the Heron take-home brief: the observed workflow, the manual pain, the proposed automation, the MVP scope, and why it is buildable.</p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-[1fr_.9fr]">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">Workflow I observed</h3>
+          <p class="mt-3 text-slate-600 leading-7">In a previous fintech onboarding workflow, business customers submitted company documents as part of KYB and due diligence checks. I saw the process from the product and operations side: documents were reviewed, key company/contact/ownership data was extracted, risk information was captured, and the final data had to be pushed into CRM and case-management systems.</p>
+          <p class="mt-3 text-slate-600 leading-7">The pain was not simply reading documents. The real problem was turning inconsistent, messy business documentation into structured, trusted, operational data that analysts and customer-facing teams could use.</p>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <h3 class="text-2xl font-black">Customer problem</h3>
+          <p class="mt-3 text-sm leading-6 text-slate-300">Startup fintechs need credible KYB workflows, but often do not have large engineering or operations teams to build document intake, OCR, verification, CRM mapping, and analyst review tooling from scratch.</p>
+          <div class="mt-5 space-y-3 text-sm">
+            <div class="rounded-2xl bg-white/10 p-4">Wrong or poor-quality documents cause customer back-and-forth.</div>
+            <div class="rounded-2xl bg-white/10 p-4">Analysts manually copy key fields into CRM and case tools.</div>
+            <div class="rounded-2xl bg-white/10 p-4">Ownership and UBO structures are difficult to interpret consistently.</div>
+            <div class="rounded-2xl bg-white/10 p-4">Teams need evidence, confidence and auditability before trusting automation.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="text-2xl font-black">Manual workflow before automation</h3>
+        <div class="mt-5 grid gap-3 md:grid-cols-3">
+          <div class="rounded-2xl bg-slate-50 p-4"><b>1. Business applies</b><p class="mt-1 text-sm text-slate-600">Customer starts onboarding and is asked to submit company documents.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>2. Documents uploaded</b><p class="mt-1 text-sm text-slate-600">Files may be blurry, expired, wrong, missing pages or in another language.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>3. Analyst reviews</b><p class="mt-1 text-sm text-slate-600">Ops/compliance manually checks validity, readability and completeness.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>4. Data extracted</b><p class="mt-1 text-sm text-slate-600">Company name, number, directors, UBOs and addresses are manually captured.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>5. Data verified</b><p class="mt-1 text-sm text-slate-600">Values are compared against registries, policies or other trusted sources.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>6. CRM updated</b><p class="mt-1 text-sm text-slate-600">Records, tickets and risk fields are created or updated manually.</p></div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">Proposed solution</h3>
+          <p class="mt-3 text-slate-600 leading-7">Build a KYB Document Intelligence platform that analyses business documentation directly. It validates uploads before submission, extracts and translates key fields, checks data against official sources, creates CRM-ready outputs, and produces an evidence-backed review pack for analysts.</p>
+          <div class="mt-5 rounded-3xl bg-emerald-50 p-5 text-emerald-900"><b>Core idea</b><p class="mt-2 text-sm">Move document issues as far upstream as possible, while giving analysts structured data and evidence when human review is still needed.</p></div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">MVP scope</h3>
+          <div class="mt-4 grid gap-2 text-sm">
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Configurable document checklist</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Upload validation and customer-facing error messages</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Document classification, OCR and extraction</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Translation for non-English documents</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Registry verification and mismatch handling</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ CRM mapping and analyst review pack</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">Non-goals for MVP</h3>
+          <div class="mt-4 space-y-3 text-sm text-slate-600">
+            <div class="rounded-2xl border border-slate-200 p-4">Do not fully automate every approval decision from day one.</div>
+            <div class="rounded-2xl border border-slate-200 p-4">Do not support every country, registry and document type immediately.</div>
+            <div class="rounded-2xl border border-slate-200 p-4">Do not replace analysts; keep them in the loop for exceptions and low-confidence cases.</div>
+            <div class="rounded-2xl border border-slate-200 p-4">Do not build heavy custom CRM implementations beyond standard mappings in the first version.</div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <h3 class="text-2xl font-black">Internal ask</h3>
+          <p class="mt-3 text-sm leading-6 text-slate-300">I would propose we build a prototype around one high-frequency workflow first: UK limited companies onboarding to a startup fintech.</p>
+          <p class="mt-3 text-sm leading-6 text-slate-300">The goal is to prove we can validate uploads, extract core company/UBO fields, verify against registry data, and generate a review pack that is useful enough for operations teams to trust.</p>
+          <div class="mt-5 rounded-3xl bg-white/10 p-4 text-sm">If this works, we can expand by country, entity type, document type and CRM integration.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey" class="bg-white/85 py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+          <h2 class="text-3xl font-black">Full end-to-end platform demo</h2>
+          <p class="mt-3 max-w-3xl text-slate-600">Run the flow from customer document upload through to extracted platform data. Use the tabs to switch between happy path and common issues.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 rounded-2xl bg-white p-1 shadow-sm ring-1 ring-slate-200">
+          <button id="happyBtn" onclick="setCase('happy')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Happy path</button>
+          <button id="illegibleBtn" onclick="setCase('illegible')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Illegible doc</button>
+          <button id="wrongBtn" onclick="setCase('wrong')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Wrong doc</button>
+          <button id="mismatchBtn" onclick="setCase('mismatch')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Registry mismatch</button>
+          <button id="ownershipBtn" onclick="setCase('ownership')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Complex ownership</button>
+        </div>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-[.95fr_.8fr_1.05fr]">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex items-center justify-between">
             <div>
-              <div class="mb-5 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">Heron take-home interactive prototype</div>
-              <h1 class="max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">From uploaded documents to clean KYB data in one workflow.</h1>
-              <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">A platform built for startup fintechs with limited tech resources. It analyses business onboarding documents directly, guides customers on what to upload, catches bad documents before submission, extracts and translates key data, verifies against official sources, creates CRM-ready fields, and packages everything into an analyst review case.</p>
-              <div class="mt-8 flex flex-wrap gap-3">
-                <a href="#journey" class="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800">Run end-to-end demo</a>
-                <button onclick="runFullDemo()" class="rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 hover:bg-slate-100">Auto-run platform</button>
-              </div>
+              <p class="text-sm font-black text-slate-500">Step 1</p>
+              <h3 class="text-xl font-black">Customer upload portal</h3>
             </div>
-        
-            <div class="glass rounded-[2rem] border border-slate-200 p-5 shadow-xl">
-              <div class="rounded-[1.5rem] bg-slate-950 p-5 text-white">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-sm text-slate-300">Current case</p>
-                    <p class="text-2xl font-black">Northstar Pay Ltd</p>
-                  </div>
-                  <span class="rounded-full bg-cyan-400/20 px-3 py-1 text-xs font-black text-cyan-200">Processing</span>
-                </div>
-                <div class="relative mt-5 h-80 overflow-hidden rounded-2xl bg-white p-5 text-slate-900 shadow-inner">
-                  <div class="absolute left-0 right-0 top-0 h-1 bg-cyan-400 scan shadow-[0_0_18px_#22d3ee]"></div>
-                  <div class="space-y-3 text-xs">
-                    <div class="h-4 w-2/3 rounded bg-slate-300"></div>
-                    <div class="h-3 w-full rounded bg-slate-200"></div>
-                    <div class="h-3 w-11/12 rounded bg-slate-200"></div>
-                    <div class="mt-5 grid grid-cols-2 gap-3">
-                      <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-3"><b>Extracted</b><br>17 fields</div>
-                      <div class="rounded-xl border border-blue-200 bg-blue-50 p-3"><b>Translated</b><br>1 document</div>
-                      <div class="rounded-xl border border-amber-200 bg-amber-50 p-3"><b>Review</b><br>2 exceptions</div>
-                      <div class="rounded-xl border border-purple-200 bg-purple-50 p-3"><b>CRM</b><br>8 fields mapped</div>
-                    </div>
-                    <div class="mt-6 rounded-xl bg-slate-100 p-3 text-slate-500">The analyst can see exactly which document, page and field produced each value.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </section>
-
-        <section id="journey" class="bg-white/85 py-14">
-            <div class="mx-auto max-w-7xl px-6">
-              <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-                <div>
-                  <h2 class="text-3xl font-black">Full end-to-end platform demo</h2>
-                  <p class="mt-3 max-w-3xl text-slate-600">Run the flow from customer document upload through to extracted platform data.</p>
-                </div>
-                <div class="flex flex-wrap gap-2 rounded-2xl bg-white p-1 shadow-sm ring-1 ring-slate-200">
-                  <button id="happyBtn" onclick="setCase('happy')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Happy path</button>
-                  <button id="illegibleBtn" onclick="setCase('illegible')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Illegible doc</button>
-                  <button id="wrongBtn" onclick="setCase('wrong')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Wrong doc</button>
-                  <button id="mismatchBtn" onclick="setCase('mismatch')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Registry mismatch</button>
-                  <button id="ownershipBtn" onclick="setCase('ownership')" class="caseBtn rounded-xl px-4 py-2 text-sm font-black">Complex ownership</button>
-                </div>
-              </div>
-        
-              <div class="grid gap-6 xl:grid-cols-[.95fr_.8fr_1.05fr]">
-                <div class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
-                  <div class="flex items-center justify-between">
-                    <div><p class="text-sm font-black text-slate-500 uppercase">Step 1</p><h3 class="text-xl font-black">Customer portal</h3></div>
-                    <button onclick="runFullDemo()" class="rounded-2xl bg-slate-950 px-4 py-2 text-sm font-black text-white">Run analysis</button>
-                  </div>
-                  <div id="customerPortal" class="mt-5 space-y-3"></div>
-                  <div id="customerMessage" class="mt-5 rounded-3xl p-4 text-sm"></div>
-                </div>
-        
-                <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-5 text-white shadow-sm">
-                  <div><p class="text-sm font-black text-slate-400 uppercase">Step 2</p><h3 class="text-xl font-black">Pipeline</h3></div>
-                  <div class="mt-5 space-y-6" id="pipelineSteps"></div>
-                  <div class="mt-6">
-                    <div class="flex items-center justify-between text-sm"><span class="font-bold">Progress</span><span id="pipelinePct">0%</span></div>
-                    <div class="mt-3 h-2 overflow-hidden rounded-full bg-white/10"><div id="pipelineBar" class="progress h-full w-0 rounded-full bg-cyan-300"></div></div>
-                  </div>
-                </div>
-        
-                <div class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
-                  <div><p class="text-sm font-black text-slate-500 uppercase">Step 3</p><h3 class="text-xl font-black">Structured Output</h3></div>
-                  <div id="platformOutput" class="mt-5 slide"></div>
-                </div>
-              </div>
-            </div>
-        </section>
-
-        <section id="unhappy" class="py-14">
-            <div class="mx-auto max-w-7xl px-6">
-              <div class="mb-8 max-w-3xl">
-                <h2 class="text-3xl font-black">Unhappy path demos</h2>
-                <p class="mt-3 text-slate-600">Catching issues early prevents unnecessary analyst rejection cycles.</p>
-              </div>
-              <div id="unhappyCards" class="grid gap-4 md:grid-cols-2 lg:grid-cols-4"></div>
-            </div>
-        </section>
-
-        <section id="output" class="py-14 bg-slate-50">
-            <div class="mx-auto max-w-7xl px-6 text-center">
-                <h2 class="text-3xl font-black mb-12">Platform Integration Output</h2>
-                <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
-                    <table class="w-full text-left text-sm">
-                      <thead class="bg-slate-100 text-slate-600"><tr><th class="px-5 py-4">Output</th><th class="px-5 py-4">Example Mapping</th><th class="px-5 py-4">Impact</th></tr></thead>
-                      <tbody class="divide-y divide-slate-100">
-                        <tr><td class="px-5 py-4 font-black">Company fields</td><td class="px-5 py-4 italic">HubSpot -> Company Object</td><td class="px-5 py-4 text-slate-600">Removes manual CRM data entry.</td></tr>
-                        <tr><td class="px-5 py-4 font-black">UBO Chain</td><td class="px-5 py-4 italic">Salesforce -> Relationships</td><td class="px-5 py-4 text-slate-600">Visualises complex ownership instantly.</td></tr>
-                        <tr><td class="px-5 py-4 font-black">Evidence Pack</td><td class="px-5 py-4 italic">Direct JSON Links</td><td class="px-5 py-4 text-slate-600">Audit-ready cases with 0 human effort.</td></tr>
-                      </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="border-t border-slate-200 bg-white py-12">
-        <div class="mx-auto max-w-7xl px-6 text-sm text-slate-500 text-center">
-            Prototype note: All document extraction and verification are simulated to demonstrate the proposed product workflow.
+            <button onclick="runFullDemo()" class="rounded-2xl bg-slate-950 px-4 py-2 text-sm font-black text-white hover:bg-slate-800">Run analysis</button>
+          </div>
+          <p class="mt-2 text-sm text-slate-600">The applicant sees dynamic requirements and live document validation before they can submit.</p>
+          <div id="customerPortal" class="mt-5 space-y-3"></div>
+          <div id="customerMessage" class="mt-5 rounded-3xl p-4 text-sm"></div>
         </div>
-    </footer>
 
-    <script>
-        // High-level tab switcher
-        function toggleView(view) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.getElementById(view).classList.add('active');
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-5 text-white shadow-sm">
+          <div>
+            <p class="text-sm font-black text-slate-400">Step 2</p>
+            <h3 class="text-xl font-black">Analysis pipeline</h3>
+          </div>
+          <div class="mt-5 space-y-6" id="pipelineSteps"></div>
+          <div class="mt-6">
+            <div class="flex items-center justify-between text-sm"><span class="font-bold">Pipeline progress</span><span id="pipelinePct">0%</span></div>
+            <div class="mt-3 h-2 overflow-hidden rounded-full bg-white/10"><div id="pipelineBar" class="progress h-full w-0 rounded-full bg-cyan-300"></div></div>
+            <p id="pipelineCaption" class="mt-3 text-xs text-slate-400">Waiting for upload.</p>
+          </div>
+        </div>
 
-            const btnReadme = document.getElementById('btn-readme');
-            const btnPitch = document.getElementById('btn-pitch');
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div>
+            <p class="text-sm font-black text-slate-500">Step 3</p>
+            <h3 class="text-xl font-black">Extracted into the platform</h3>
+          </div>
+          <p class="mt-2 text-sm text-slate-600">Structured data, verification results, CRM fields and next action appear automatically.</p>
+          <div id="platformOutput" class="mt-5 slide"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            if (view === 'readme') {
-                btnReadme.classList.add('active-btn');
-                btnReadme.classList.remove('text-slate-500');
-                btnPitch.classList.remove('active-btn');
-                btnPitch.classList.add('text-slate-500');
-            } else {
-                btnPitch.classList.add('active-btn');
-                btnPitch.classList.remove('text-slate-500');
-                btnReadme.classList.remove('active-btn');
-                btnReadme.classList.add('text-slate-500');
-            }
-        }
+  <section id="unhappy" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-8 max-w-3xl">
+        <h2 class="text-3xl font-black">Unhappy path demos</h2>
+        <p class="mt-3 text-slate-600">These show the platform’s value when things go wrong: it catches issues early, explains them to the customer, and prevents unnecessary analyst work.</p>
+      </div>
+      <div id="unhappyCards" class="grid gap-4 md:grid-cols-2 lg:grid-cols-4"></div>
+    </div>
+  </section>
 
-        // Demo logic (from index-merged.html)
-        const cases={
-          happy:{label:'Happy path',tone:'ok',summary:'All required documents are readable and verified. Case can move to analyst approval or auto-create CRM records.',customer:'Great — all required documents are readable and accepted.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Image • clear • accepted','ok'],['Proof of address','PDF • dated 22 days ago','ok'],['Ownership declaration','PDF • ownership totals 100%','ok']],pipeline:[['Classify documents','4 documents classified','ok'],['Extract key fields','17 fields extracted with high confidence','ok'],['Verify official data','Company number and director matched','ok'],['Create platform data','CRM fields and review pack generated','ok']],fields:[['Company name','Northstar Pay Ltd','Certificate p1','98%'],['Company number','12884591','Registry match','99%'],['Director','Amara Hussain','Director ID + registry','95%'],['UBO','Amara Hussain - 63%','Ownership declaration p2','91%']],action:'Ready for approval',next:'Create company, contact, UBO and case records.'},
-          illegible:{label:'Illegible document',tone:'bad',summary:'The customer uploaded a blurry ID. The platform blocks submission and explains exactly what needs to be fixed.',customer:'We cannot read the Director ID. Please upload a clearer image.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Blurry image • text unreadable','bad'],['Proof of address','PDF • dated 18 days ago','ok'],['Ownership declaration','PDF • accepted','ok']],pipeline:[['Classify documents','Document type detected: Director ID','ok'],['Quality check','OCR confidence below 60%','bad'],['Customer feedback','Submission blocked before ops review','bad'],['Platform data','Partial data saved as draft','warn']],fields:[['Company name','Northstar Pay Ltd','Certificate p1','98%'],['Director ID number','Not extracted','Image unreadable','21%']],action:'Block submission',next:'Ask customer to re-upload clear ID.'},
-          wrong:{label:'Wrong document',tone:'bad',summary:'Customer uploaded bank statement instead of address proof.',customer:'This looks like a bank statement. Please upload a utility bill or lease.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Image • clear • accepted','ok'],['Proof of address','Wrong type: bank statement uploaded','bad'],['Ownership declaration','PDF • accepted','ok']],pipeline:[['Classify documents','Bank statement detected','ok'],['Rule check','Policy does not accept bank statements','bad'],['Customer feedback','Specific replacements shown','bad'],['Platform data','Case not submitted','warn']],fields:[['Uploaded doc type','Bank statement','Classification model','97%'],['Required doc type','Address proof','Customer rule set','N/A']],action:'Request replacement',next:'Keep customer in upload flow.'},
-          mismatch:{label:'Registry mismatch',tone:'warn',summary:'Extracted company number does not match official registry data.',customer:'Documents uploaded successfully. We found a mismatch in registration details.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Image • clear • accepted','ok'],['Proof of address','PDF • accepted','ok'],['Ownership declaration','PDF • accepted','ok']],pipeline:[['Extract company number','12884591 found','ok'],['Verify registry','Registry returns 12884519','warn'],['Reconcile values','Potential typo','warn'],['Route case','Manual review required','warn']],fields:[['Extracted company number','12884591','Certificate p1','97%'],['Registry company number','12884519','Official registry','99%']],action:'Manual review',next:'Show analyst both values and source evidence.'},
-          ownership:{label:'Complex ownership',tone:'warn',summary:'Holding company detected, but parent registry evidence is missing.',customer:'Ownership chart received, but Northstar Holdings Ltd evidence is missing.',docs:[['Ownership chart','Three-level structure detected','ok'],['Parent company registry doc','Missing required evidence','bad'],['Shareholder declaration','Percentages total 100%','ok'],['Director ID','Accepted','ok']],pipeline:[['Extract ownership chain','3 entities identified','ok'],['Check ownership totals','Totals add to 100%','ok'],['Detect missing evidence','Parent registry doc missing','bad'],['Route case','Request info before analyst review','bad']],fields:[['Operating company','Northstar Pay Ltd','Ownership chart p1','98%'],['Parent entity','Northstar Holdings Ltd','Ownership chart p2','84%']],action:'Request missing evidence',next:'Request parent company registry doc.'}
-        };
-        const unhappy=['illegible','wrong','mismatch','ownership'];
-        let activeCase='happy';
+  <section id="startup" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="grid gap-6 lg:grid-cols-[1fr_.95fr]">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-600">Who this is for</div>
+          <h2 class="mt-4 text-3xl font-black">Built for startup fintechs with lean teams</h2>
+          <p class="mt-3 text-slate-600 leading-7">This product is designed for fintechs that need robust business onboarding checks but do not have the time or technical resources to build a full document-processing stack themselves.</p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Lean engineering teams</b><p class="mt-1 text-sm text-slate-600">No need to build OCR, rules engines, verification connectors and case tooling from scratch.</p></div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Operations under pressure</b><p class="mt-1 text-sm text-slate-600">Reduces customer chasing and manual review by catching issues earlier in the flow.</p></div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Fast time to launch</b><p class="mt-1 text-sm text-slate-600">Helps a startup launch a more credible KYB process without a long platform build.</p></div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><b>Configurable controls</b><p class="mt-1 text-sm text-slate-600">Document rules, review thresholds and routing can be tailored without heavy custom development.</p></div>
+          </div>
+        </div>
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <h3 class="text-2xl font-black">Why this matters for a startup fintech</h3>
+          <div class="mt-5 space-y-3 text-sm">
+            <div class="rounded-2xl bg-white/10 p-4">✓ Avoid building and maintaining multiple point solutions internally</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Give ops teams a clean review workflow earlier in the company journey</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Create structured CRM-ready data without custom schema work every time</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Support growth into new countries and document types with configurable rules</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        function cls(status){return status==='ok'?'border-emerald-200 bg-emerald-50 text-emerald-800':status==='bad'?'border-red-200 bg-red-50 text-red-800':'border-amber-200 bg-amber-50 text-amber-800'}
-        function icon(status){return status==='ok'?'✓':status==='bad'?'×':'!'}
+  <section id="output" class="bg-white/85 py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-8 max-w-3xl">
+        <h2 class="text-3xl font-black">What the platform creates</h2>
+        <p class="mt-3 text-slate-600">The end product is not just OCR text. It is a usable onboarding case with structured data, evidence, CRM mapping and routing.</p>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-[1.1fr_.9fr]">
+        <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-100 text-slate-600"><tr><th class="px-5 py-4">Output</th><th class="px-5 py-4">Example</th><th class="px-5 py-4">Why it matters</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr><td class="px-5 py-4 font-black">Company fields</td><td class="px-5 py-4">Name, number, jurisdiction, address</td><td class="px-5 py-4 text-slate-600">Avoids manual copy/paste into CRM.</td></tr>
+              <tr><td class="px-5 py-4 font-black">People and UBOs</td><td class="px-5 py-4">Directors, shareholders, ownership %</td><td class="px-5 py-4 text-slate-600">Makes ownership review structured.</td></tr>
+              <tr><td class="px-5 py-4 font-black">Evidence links</td><td class="px-5 py-4">Document, page, highlighted text</td><td class="px-5 py-4 text-slate-600">Builds analyst trust and auditability.</td></tr>
+              <tr><td class="px-5 py-4 font-black">Decision routing</td><td class="px-5 py-4">Approve, request info, manual review</td><td class="px-5 py-4 text-slate-600">Only exceptions reach analysts.</td></tr>
+              <tr><td class="px-5 py-4 font-black">CRM schema</td><td class="px-5 py-4">Auto-created properties and mappings</td><td class="px-5 py-4 text-slate-600">Helps fintechs without large ops/tooling teams.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <h3 class="text-xl font-black">Core product promise</h3>
+          <p class="mt-3 text-sm leading-6 text-slate-300">The platform analyses documentation, identifies issues while the customer is still in the upload flow, and only sends clean, evidence-backed cases into the fintech’s operating systems.</p>
+          <div class="mt-5 space-y-3 text-sm">
+            <div class="rounded-2xl bg-white/10 p-4">✓ Faster onboarding without sacrificing checks</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Fewer customer chase emails</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Cleaner CRM/case data</div>
+            <div class="rounded-2xl bg-white/10 p-4">✓ Better analyst confidence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        function setCase(key){
-          activeCase=key;
-          document.querySelectorAll('.caseBtn').forEach(b=>b.className='caseBtn rounded-xl px-4 py-2 text-sm font-black text-slate-600 hover:bg-slate-100');
-          document.getElementById(key+'Btn').className='caseBtn rounded-xl px-4 py-2 text-sm font-black bg-slate-950 text-white';
-          renderCase();
-          resetPipeline();
-        }
+  <section id="integrations" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-8 max-w-3xl">
+        <h2 class="text-3xl font-black">Native integrations for the systems startups already use</h2>
+        <p class="mt-3 text-slate-600">To work for lean fintech teams, the product should not stop at document analysis. It should push clean, structured outputs into the tools they already rely on for onboarding and operations.</p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 font-black text-blue-700">SF</div>
+          <h3 class="mt-4 text-lg font-black">Salesforce</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Create or update account, contact and case records with extracted company and ownership data.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: onboard larger B2B teams already running on Salesforce.</div>
+        </div>
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 font-black text-orange-700">HS</div>
+          <h3 class="mt-4 text-lg font-black">HubSpot</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Map extracted data into companies, contacts, tickets and custom properties for lean go-to-market and ops teams.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: startup fintechs using HubSpot as their CRM and workflow hub.</div>
+        </div>
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 font-black text-emerald-700">PD</div>
+          <h3 class="mt-4 text-lg font-black">Pipedrive</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">Sync approved business details into people, organisations and deal workflows for smaller commercial teams.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: early-stage fintechs with lighter-weight sales and onboarding tooling.</div>
+        </div>
+        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 font-black text-violet-700">API</div>
+          <h3 class="mt-4 text-lg font-black">API and webhook layer</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600">For customers with custom stacks, the same outputs can be delivered through APIs and event-based webhooks.</p>
+          <div class="mt-4 rounded-2xl bg-slate-50 p-3 text-xs text-slate-600">Use case: grow from no-code integrations to deeper platform integration over time.</div>
+        </div>
+      </div>
+      <div class="mt-6 rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+        <h3 class="text-xl font-black">Integration value</h3>
+        <p class="mt-3 text-sm leading-6 text-slate-300">The product becomes more valuable when startups do not have to manually re-enter extracted data. Native integrations make the output immediately operational in the CRM systems where their teams already work.</p>
+      </div>
+    </div>
+  </section>
 
-        function renderCase(){
-          const c=cases[activeCase];
-          document.getElementById('customerPortal').innerHTML=c.docs.map(d=>`<div class="rounded-2xl border p-4 ${cls(d[2])}"><div class="flex items-center justify-between gap-3"><p class="font-black">${d[0]}</p><span class="font-black">${icon(d[2])}</span></div><p class="mt-1 text-sm opacity-90">${d[1]}</p></div>`).join('');
-          document.getElementById('customerMessage').className='mt-5 rounded-3xl p-4 text-sm '+cls(c.tone);
-          document.getElementById('customerMessage').innerHTML=`<b>Status:</b><p class="mt-1">${c.customer}</p>`;
-          renderPipeline(false);
-          renderOutput();
-        }
+  <section id="build" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-black">Build approach</h2>
+        <p class="mt-3 text-slate-600 leading-7">The realistic MVP is a frontend intake portal, document analysis service, rules engine, verification connectors, CRM schema mapper and review-case UI.</p>
+      </div>
+      <div class="mt-8 grid gap-4 lg:grid-cols-5">
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p class="text-sm font-black text-slate-500">01</p><h3 class="mt-2 font-black">Upload intake</h3><p class="mt-2 text-sm text-slate-600">Dynamic checklist, file validation and customer-facing error messages.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p class="text-sm font-black text-slate-500">02</p><h3 class="mt-2 font-black">Document AI</h3><p class="mt-2 text-sm text-slate-600">Classify, OCR, translate, extract entities and confidence score.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p class="text-sm font-black text-slate-500">03</p><h3 class="mt-2 font-black">Verification</h3><p class="mt-2 text-sm text-slate-600">Company registry, address, ownership and customer rule checks.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p class="text-sm font-black text-slate-500">04</p><h3 class="mt-2 font-black">Data model</h3><p class="mt-2 text-sm text-slate-600">Create/map CRM fields and relationships for companies, contacts and UBOs.</p></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><p class="text-sm font-black text-slate-500">05</p><h3 class="mt-2 font-black">Review case</h3><p class="mt-2 text-sm text-slate-600">Evidence pack, exception summary, decision routing and audit log.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
 
-        function renderPipeline(ran=false,upto=0){
-          const c=cases[activeCase];
-          document.getElementById('pipelineSteps').innerHTML=c.pipeline.map((p,i)=>`<div class="relative path-line rounded-2xl border p-4 ${ran&&i<upto?cls(p[2]):'border-slate-700 bg-white/5 text-slate-300'}"><div class="flex items-center justify-between gap-3"><p class="font-black">${p[0]}</p><span>${ran&&i<upto?icon(p[2]):'○'}</span></div><p class="mt-1 text-sm opacity-90">${p[1]}</p></div>`).join('');
-        }
+<footer class="border-t border-slate-200 bg-white py-8">
+  <div class="mx-auto max-w-7xl px-6 text-sm text-slate-500">Prototype note: all uploads, extraction, verification and CRM output are simulated with mock data to demonstrate the proposed product workflow.</div>
+</footer>
 
-        function renderOutput(){
-          const c=cases[activeCase];
-          let statusClass=c.tone==='ok'?'bg-emerald-100 text-emerald-700':c.tone==='bad'?'bg-red-100 text-red-700':'bg-amber-100 text-amber-700';
-          document.getElementById('platformOutput').innerHTML=`<div class="rounded-3xl border border-slate-200 bg-slate-50 p-4"><div class="flex items-center justify-between gap-3"><div><p class="text-xs font-black text-slate-500 uppercase tracking-tighter">Outcome</p><h4 class="text-xl font-black">${c.action}</h4></div><span class="rounded-full px-3 py-1 text-xs font-black ${statusClass}">${c.label}</span></div></div><div class="mt-5 overflow-hidden rounded-2xl border border-slate-200"><table class="w-full text-xs"><thead class="bg-slate-100"><tr><th class="p-3 text-left">Field</th><th class="p-3 text-left">Value</th><th class="p-3 text-left">Conf.</th></tr></thead><tbody>${c.fields.map(f=>`<tr class="border-t border-slate-100"><td class="p-3 font-black">${f[0]}</td><td class="p-3">${f[1]}</td><td class="p-3">${f[3]}</td></tr>`).join('')}</tbody></table></div>`;
-        }
-
-        function resetPipeline(){
-          document.getElementById('pipelineBar').style.width='0%';
-          document.getElementById('pipelinePct').textContent='0%';
-          renderPipeline(false);
-        }
-
-        function runFullDemo(){
-          resetPipeline();
-          let i=0;
-          const c=cases[activeCase];
-          const timer=setInterval(()=>{
-            i++;
-            let pct=i*25;
-            document.getElementById('pipelineBar').style.width=pct+'%';
-            document.getElementById('pipelinePct').textContent=pct+'%';
-            renderPipeline(true,i);
-            if(i>=4){
-              clearInterval(timer);
-              renderOutput();
-            }
-          },600);
-        }
-
-        function renderUnhappy(){
-          document.getElementById('unhappyCards').innerHTML=unhappy.map(k=>{
-            const c=cases[k];
-            return `<button onclick="setCase('${k}');document.getElementById('journey').scrollIntoView({behavior:'smooth'});setTimeout(runFullDemo,350)" class="rounded-[1.75rem] border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md"><span class="rounded-full px-3 py-1 text-xs font-black ${c.tone==='bad'?'bg-red-100 text-red-700':'bg-amber-100 text-amber-700'}">${c.action}</span><h3 class="mt-4 text-lg font-black">${c.label}</h3><p class="mt-2 text-sm leading-6 text-slate-600">${c.summary}</p></button>`;
-          }).join('');
-        }
-
-        // Initialize
-        renderUnhappy();
-        setCase('happy');
-    </script>
+<script>
+const cases={
+  happy:{label:'Happy path',tone:'ok',summary:'All required documents are readable and verified. Case can move to analyst approval or auto-create CRM records.',customer:'Great — all required documents are readable and accepted. You can submit the application.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Image • clear • accepted','ok'],['Proof of address','PDF • dated 22 days ago','ok'],['Ownership declaration','PDF • ownership totals 100%','ok']],pipeline:[['Classify documents','4 documents classified','ok'],['Extract key fields','17 fields extracted with high confidence','ok'],['Verify official data','Company number and director matched','ok'],['Create platform data','CRM fields and review pack generated','ok']],fields:[['Company name','Northstar Pay Ltd','Certificate p1','98%'],['Company number','12884591','Registry match','99%'],['Director','Amara Hussain','Director ID + registry','95%'],['UBO','Amara Hussain - 63%','Ownership declaration p2','91%'],['Registered address','12 Market Street, London','Registry + address proof','94%']],action:'Ready for approval',next:'Create company, contact, UBO and case records.'},
+  illegible:{label:'Illegible document',tone:'bad',summary:'The customer uploaded a blurry ID. The platform blocks submission and explains exactly what needs to be fixed.',customer:'We cannot read the Director ID. Please upload a clearer image where the full document and name are visible.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Blurry image • text unreadable','bad'],['Proof of address','PDF • dated 18 days ago','ok'],['Ownership declaration','PDF • accepted','ok']],pipeline:[['Classify documents','Document type detected: Director ID','ok'],['Quality check','OCR confidence below 60%','bad'],['Customer feedback','Submission blocked before ops review','bad'],['Platform data','Partial data saved as draft','warn']],fields:[['Company name','Northstar Pay Ltd','Certificate p1','98%'],['Director ID number','Not extracted','Image unreadable','21%'],['Director name','Possible: Amara Hussain','Low confidence OCR','49%']],action:'Block submission',next:'Ask customer to re-upload clear ID before case enters analyst queue.'},
+  wrong:{label:'Wrong document',tone:'bad',summary:'The customer uploaded a bank statement instead of proof of registered address. The platform catches the mismatch instantly.',customer:'This looks like a bank statement. For proof of registered address, please upload a utility bill, lease, tax letter or official registry document.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Image • clear • accepted','ok'],['Proof of address','Wrong type: bank statement uploaded','bad'],['Ownership declaration','PDF • accepted','ok']],pipeline:[['Classify documents','Bank statement detected','ok'],['Rule check','Customer policy does not accept bank statements for address proof','bad'],['Customer feedback','Specific replacement documents shown','bad'],['Platform data','Case not submitted until corrected','warn']],fields:[['Uploaded doc type','Bank statement','Classification model','97%'],['Required doc type','Address proof','Customer rule set','N/A'],['Suggested replacements','Utility bill, lease, tax letter','Rule engine','N/A']],action:'Request replacement document',next:'Keep customer in upload flow and prevent avoidable analyst rejection.'},
+  mismatch:{label:'Registry mismatch',tone:'warn',summary:'Documents are readable, but the extracted company number does not match official registry data. The platform routes it to review with evidence.',customer:'Documents uploaded successfully. We found a mismatch and may need an analyst to review the company registration details.',docs:[['Certificate of incorporation','PDF • readable • accepted','ok'],['Director ID','Image • clear • accepted','ok'],['Proof of address','PDF • accepted','ok'],['Ownership declaration','PDF • accepted','ok']],pipeline:[['Extract company number','12884591 found on certificate','ok'],['Verify registry','Registry returns 12884519 for similar company name','warn'],['Reconcile values','Potential typo or wrong certificate','warn'],['Route case','Manual review required','warn']],fields:[['Extracted company number','12884591','Certificate p1','97%'],['Registry company number','12884519','Official registry','99%'],['Company name match','Northstar Pay Ltd','Fuzzy match','88%']],action:'Manual review',next:'Show analyst both values, source evidence and recommended source of truth.'},
+  ownership:{label:'Complex ownership',tone:'warn',summary:'The uploaded ownership chart shows a holding company, but the parent company registry evidence is missing. The platform flags the missing link.',customer:'Ownership chart received, but one parent company document is missing. Please upload registry evidence for Northstar Holdings Ltd.',docs:[['Ownership chart','Three-level structure detected','ok'],['Parent company registry doc','Missing required evidence','bad'],['Shareholder declaration','Percentages total 100%','ok'],['Director ID','Accepted','ok']],pipeline:[['Extract ownership chain','3 entities and 1 UBO identified','ok'],['Check ownership totals','Totals add to 100%','ok'],['Detect missing evidence','Parent company registry document missing','bad'],['Route case','Request info before analyst review','bad']],fields:[['Operating company','Northstar Pay Ltd','Ownership chart p1','98%'],['Parent entity','Northstar Holdings Ltd','Ownership chart p2','84%'],['Ultimate owner','Amara Hussain via holding company','Ownership chart p2','82%'],['Missing evidence','Parent company registry extract','Rule engine','N/A']],action:'Request missing evidence',next:'Ask for the parent company registry document before creating final review case.'}
+};
+const unhappy=['illegible','wrong','mismatch','ownership'];
+let activeCase='happy';
+function cls(status){return status==='ok'?'border-emerald-200 bg-emerald-50 text-emerald-800':status==='bad'?'border-red-200 bg-red-50 text-red-800':'border-amber-200 bg-amber-50 text-amber-800'}
+function icon(status){return status==='ok'?'✓':status==='bad'?'×':'!'}
+function setCase(key){
+  activeCase=key;
+  document.querySelectorAll('.caseBtn').forEach(b=>b.className='caseBtn rounded-xl px-4 py-2 text-sm font-black text-slate-600 hover:bg-slate-100');
+  document.getElementById(key+'Btn').className='caseBtn rounded-xl px-4 py-2 text-sm font-black bg-slate-950 text-white';
+  renderCase();
+  resetPipeline();
+}
+function renderCase(){
+  const c=cases[activeCase];
+  document.getElementById('customerPortal').innerHTML=c.docs.map(d=>`<div class="rounded-2xl border p-4 ${cls(d[2])}"><div class="flex items-center justify-between gap-3"><p class="font-black">${d[0]}</p><span class="font-black">${icon(d[2])}</span></div><p class="mt-1 text-sm opacity-90">${d[1]}</p></div>`).join('');
+  document.getElementById('customerMessage').className='mt-5 rounded-3xl p-4 text-sm '+cls(c.tone);
+  document.getElementById('customerMessage').innerHTML=`<b>Customer-facing message</b><p class="mt-1">${c.customer}</p>`;
+  renderPipeline(false);
+  renderOutput();
+}
+function renderPipeline(ran=false,upto=0){
+  const c=cases[activeCase];
+  document.getElementById('pipelineSteps').innerHTML=c.pipeline.map((p,i)=>`<div class="relative path-line rounded-2xl border p-4 ${ran&&i<upto?cls(p[2]):'border-slate-700 bg-white/5 text-slate-300'}"><div class="flex items-center justify-between gap-3"><p class="font-black">${p[0]}</p><span class="${ran&&i<upto?'':'text-slate-500'}">${ran&&i<upto?icon(p[2]):'○'}</span></div><p class="mt-1 text-sm opacity-90">${p[1]}</p></div>`).join('');
+}
+function renderOutput(){
+  const c=cases[activeCase];
+  let statusClass=c.tone==='ok'?'bg-emerald-100 text-emerald-700':c.tone==='bad'?'bg-red-100 text-red-700':'bg-amber-100 text-amber-700';
+  document.getElementById('platformOutput').innerHTML=`<div class="rounded-3xl border border-slate-200 bg-slate-50 p-4"><div class="flex items-center justify-between gap-3"><div><p class="text-sm font-black text-slate-500">Outcome</p><h4 class="text-xl font-black">${c.action}</h4></div><span class="rounded-full px-3 py-1 text-xs font-black ${statusClass}">${c.label}</span></div><p class="mt-3 text-sm text-slate-600">${c.summary}</p></div><div class="mt-5 overflow-hidden rounded-2xl border border-slate-200"><table class="w-full text-sm"><thead class="bg-slate-100 text-slate-600"><tr><th class="p-3 text-left">Field</th><th class="p-3 text-left">Value</th><th class="p-3 text-left">Evidence</th><th class="p-3 text-left">Confidence</th></tr></thead><tbody class="divide-y divide-slate-100">${c.fields.map(f=>`<tr><td class="p-3 font-black">${f[0]}</td><td class="p-3">${f[1]}</td><td class="p-3 text-slate-600">${f[2]}</td><td class="p-3">${f[3]}</td></tr>`).join('')}</tbody></table></div><div class="mt-5 rounded-3xl bg-slate-950 p-5 text-white"><b>Next platform action</b><p class="mt-2 text-sm text-slate-300">${c.next}</p><div class="mt-4 grid gap-2 sm:grid-cols-2"><div class="rounded-2xl bg-white/10 p-3 text-sm">CRM fields mapped</div><div class="rounded-2xl bg-white/10 p-3 text-sm">Evidence stored</div><div class="rounded-2xl bg-white/10 p-3 text-sm">Audit event created</div><div class="rounded-2xl bg-white/10 p-3 text-sm">Routing rule applied</div></div></div>`;
+}
+function resetPipeline(){
+  document.getElementById('pipelineBar').style.width='0%';
+  document.getElementById('pipelinePct').textContent='0%';
+  document.getElementById('pipelineCaption').textContent='Waiting for upload.';
+  renderPipeline(false);
+}
+function runFullDemo(){
+  document.getElementById('journey').scrollIntoView({behavior:'smooth'});
+  resetPipeline();
+  let i=0;
+  const c=cases[activeCase];
+  const timer=setInterval(()=>{
+    i++;
+    let pct=i*25;
+    document.getElementById('pipelineBar').style.width=pct+'%';
+    document.getElementById('pipelinePct').textContent=pct+'%';
+    document.getElementById('pipelineCaption').textContent=c.pipeline[i-1][1];
+    renderPipeline(true,i);
+    if(i>=4){
+      clearInterval(timer);
+      document.getElementById('pipelineCaption').textContent='Analysis complete. Platform output generated.';
+      renderOutput();
+    }
+  },700);
+}
+function renderUnhappy(){
+  document.getElementById('unhappyCards').innerHTML=unhappy.map(k=>{
+    const c=cases[k];
+    return `<button onclick="setCase('${k}');document.getElementById('journey').scrollIntoView({behavior:'smooth'});setTimeout(runFullDemo,350)" class="rounded-[1.75rem] border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md"><span class="rounded-full px-3 py-1 text-xs font-black ${c.tone==='bad'?'bg-red-100 text-red-700':'bg-amber-100 text-amber-700'}">${c.action}</span><h3 class="mt-4 text-lg font-black">${c.label}</h3><p class="mt-2 text-sm leading-6 text-slate-600">${c.summary}</p></button>`;
+  }).join('');
+}
+renderUnhappy();
+setCase('happy');
+</script>
 </body>
 </html>
