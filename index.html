@@ -3,148 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM Task | Workflow Automation Solution</title>
+    <title>PM Case Study | Workflow Automation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .active-tab { border-bottom: 3px solid #2563eb; color: #2563eb; }
+        .active-btn { background-color: #2563eb; color: white; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-900 transition-colors duration-300">
 
-    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
-        <div class="max-w-4xl mx-auto flex justify-center">
-            <button onclick="showTab('readme')" id="readme-tab" class="px-8 py-4 font-bold text-sm uppercase tracking-widest active-tab hover:text-blue-600 transition">
-                📂 Internal Readme (The Thinking)
-            </button>
-            <button onclick="showTab('pitch')" id="pitch-tab" class="px-8 py-4 font-bold text-sm uppercase tracking-widest text-slate-500 hover:text-blue-600 transition">
-                🚀 Product Pitch (The Demo)
-            </button>
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400">View Mode</span>
+            </div>
+            <div class="inline-flex rounded-lg border border-slate-200 p-1 bg-slate-100">
+                <button onclick="toggleView('readme')" id="btn-readme" class="px-6 py-2 rounded-md text-sm font-bold transition-all active-btn">
+                    📂 FOR INTERVIEWERS: Readme & Logic
+                </button>
+                <button onclick="toggleView('pitch')" id="btn-pitch" class="px-6 py-2 rounded-md text-sm font-bold text-slate-500 transition-all">
+                    🚀 FOR CUSTOMERS: Product Pitch
+                </button>
+            </div>
         </div>
-    </nav>
+    </div>
 
     <main id="readme" class="tab-content active max-w-4xl mx-auto px-6 py-12">
-        <header class="mb-12">
-            <h1 class="text-3xl font-extrabold text-slate-900">Task Strategy & Context</h1>
-            <p class="text-slate-600 mt-2">The "Behind-the-Scenes" on the workflow selection and technical pragmatism.</p>
-        </header>
-
-        <section class="space-y-10">
-            <div>
-                <h3 class="text-lg font-bold text-blue-600 uppercase mb-2">01. My Role & Context</h3>
-                <p class="text-slate-700 leading-relaxed">
-                    In my previous role as a **Product Manager** at a commercial fintech, I oversaw the credit-decisioning engine. I observed that our biggest friction point wasn't the algorithm—it was the **unstructured data entry** performed by junior underwriters before the algorithm could even run.
-                </p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl border border-slate-200">
-                <h3 class="text-lg font-bold text-slate-900 mb-2">02. The Workflow: "Manual Covenant Tracking"</h3>
-                <p class="text-slate-600 text-sm mb-4 italic">Layperson explanation:</p>
-                <p class="text-slate-700 leading-relaxed">
-                    When a bank lends money, they set rules (covenants) like "You must always have more cash than debt." Currently, a human must manually download 12 months of bank statements, find the revenue lines in a 50-page PDF, and type them into Excel to see if the rules were broken. 
-                </p>
-                <div class="mt-4 p-4 bg-red-50 border-l-4 border-red-400 text-red-800 text-sm">
-                    <strong>The Pain:</strong> It takes 3 hours per loan. With 1,000 loans, that’s 3,000 hours of high-risk manual labor where a single typo could hide a multi-million dollar default.
-                </div>
-            </div>
-
-            <div>
-                <h3 class="text-lg font-bold text-slate-900 mb-4">03. Technical Pragmatism</h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start">
-                        <span class="bg-slate-200 px-2 py-1 rounded text-xs font-mono mr-3">Ingestion</span>
-                        <p class="text-sm text-slate-600">Utilizing OCR (Amazon Textract/Azure) to flatten PDFs, but adding a <strong>Coordination Layer</strong> to handle bank-specific formatting variations.</p>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-slate-200 px-2 py-1 rounded text-xs font-mono mr-3">Intelligence</span>
-                        <p class="text-sm text-slate-600">Using an LLM (GPT-4o) with a defined JSON schema to perform <strong>Entity Extraction</strong> (identifying "Total Revenue" vs "Tax Returns").</p>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-slate-200 px-2 py-1 rounded text-xs font-mono mr-3">Validation</span>
-                        <p class="text-sm text-slate-600">A simple Python rules-engine calculates the ratios. No "AI black box" here—the math must be deterministic for legal compliance.</p>
-                    </li>
-                </ul>
+        <section class="mb-12">
+            <h1 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Internal Memo: Workflow Design Strategy</h1>
+            <div class="p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-800 rounded-r-lg">
+                <p class="font-medium text-sm">Target Audience: Product & Engineering Teams</p>
+                <p class="text-xs mt-1">Goal: Demonstrate detail orientation, technical pragmatism, and customer empathy.</p>
             </div>
         </section>
+
+        <div class="space-y-12">
+            <article>
+                <h2 class="text-xl font-bold border-b border-slate-200 pb-2 mb-4">1. Role & Context</h2>
+                <p class="text-slate-600 leading-relaxed">
+                    In my previous role within Fintech Operations, I noticed that the credit approval bottleneck wasn't the risk model—it was <strong>data ingestion.</strong> I observed underwriters spending 60% of their day manually copying figures from bank statements into Excel. This task focuses on automating that extraction layer.
+                </p>
+            </article>
+
+            <article>
+                <h2 class="text-xl font-bold border-b border-slate-200 pb-2 mb-4">2. The Manual Workflow (The "Pain")</h2>
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="font-bold text-red-600 mb-2">The "Stare and Compare"</h3>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            A borrower submits 6 months of PDFs. An analyst manually identifies "Revenue" vs. "Loan Transfers." If the analyst misreads a digit or misses a transfer, the bank funds a high-risk loan. 
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 px-6 py-4 border-t border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-tighter">Current Cost: 3-4 Hours per file | High Error Rate | Stale Data</p>
+                    </div>
+                </div>
+            </article>
+
+            <article>
+                <h2 class="text-xl font-bold border-b border-slate-200 pb-2 mb-4">3. Technical Solution & Pragmatism</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-white border border-slate-200 rounded-lg">
+                        <h4 class="font-bold text-slate-900 text-sm mb-2">LLM-Driven Extraction</h4>
+                        <p class="text-xs text-slate-500">Instead of brittle regex or templates, we utilize a Large Language Model (LLM) to map fields (e.g., 'Gross Sales' or 'Incoming ACH') to a standard JSON schema, regardless of the bank's format.</p>
+                    </div>
+                    <div class="p-5 bg-white border border-slate-200 rounded-lg">
+                        <h4 class="font-bold text-slate-900 text-sm mb-2">Deterministic Validation</h4>
+                        <p class="text-xs text-slate-500">While extraction is AI-based, the math is 100% Python-based rules. This ensures legal compliance and allows analysts to "verify" rather than "data enter."</p>
+                    </div>
+                </div>
+            </article>
+        </div>
     </main>
 
     <main id="pitch" class="tab-content max-w-5xl mx-auto px-6 py-12">
-        <div class="bg-blue-600 rounded-3xl p-12 text-center text-white mb-12 shadow-2xl">
-            <h2 class="text-4xl font-black mb-4 tracking-tight">Project Watchtower</h2>
-            <p class="text-xl text-blue-100 max-w-2xl mx-auto font-light">Stop chasing bank statements. Start managing risk in real-time.</p>
+        <section class="text-center py-16 px-4 bg-gradient-to-br from-blue-900 to-indigo-950 rounded-3xl text-white shadow-2xl mb-12">
+            <h2 class="text-5xl font-black mb-6 tracking-tight">Project Watchtower</h2>
+            <p class="text-xl text-blue-100 max-w-2xl mx-auto font-light mb-8">
+                Instant financial intelligence. No more manual data entry. No more missing the fine print.
+            </p>
+            <div class="inline-flex gap-4">
+                <span class="bg-blue-500/30 border border-blue-400 px-4 py-2 rounded-full text-sm font-bold">API-First</span>
+                <span class="bg-white/10 border border-white/20 px-4 py-2 rounded-full text-sm font-bold">99.9% Accuracy</span>
+            </div>
+        </section>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-20">
+            <div class="p-8 bg-white rounded-2xl border border-slate-100 shadow-xl hover:shadow-2xl transition">
+                <div class="text-3xl mb-4">📄</div>
+                <h4 class="text-lg font-bold mb-2">Universal Ingestion</h4>
+                <p class="text-slate-500 text-sm">Upload any bank statement or P&L. We normalize messy PDFs into clean, actionable data in seconds.</p>
+            </div>
+            <div class="p-8 bg-white rounded-2xl border border-slate-100 shadow-xl hover:shadow-2xl transition">
+                <div class="text-3xl mb-4">🔍</div>
+                <h4 class="text-lg font-bold mb-2">Covenant Monitoring</h4>
+                <p class="text-slate-500 text-sm">Automatically track Debt-to-Equity and DSCR ratios. Get alerted the moment a borrower hits a limit.</p>
+            </div>
+            <div class="p-8 bg-white rounded-2xl border border-slate-100 shadow-xl hover:shadow-2xl transition">
+                <div class="text-3xl mb-4">⚡</div>
+                <h4 class="text-lg font-bold mb-2">Instant Decisions</h4>
+                <p class="text-slate-500 text-sm">Reduce your time-to-fund from days to minutes. Win more deals by being the fastest lender on the market.</p>
+            </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
-            <div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-4">The Solution: Intelligent Ingestion</h3>
-                <p class="text-slate-600 leading-relaxed mb-6">
-                    Watchtower automates the extraction and validation of financial covenants directly from borrower-provided documents. We turn a 3-hour manual audit into a 30-second automated check.
-                </p>
+        <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl">
+            <div class="flex items-center px-6 py-3 bg-slate-800 gap-2">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="ml-4 text-xs font-mono text-slate-400">watchtower-api/v1/extract</span>
+            </div>
+            <div class="p-8 grid md:grid-cols-2 gap-8">
                 <div class="space-y-4">
-                    <div class="flex items-center p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
-                        <div class="bg-blue-100 p-2 rounded-full mr-4">🚀</div>
-                        <span class="font-semibold">90% faster Time-to-Decision</span>
-                    </div>
-                    <div class="flex items-center p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
-                        <div class="bg-green-100 p-2 rounded-full mr-4">🎯</div>
-                        <span class="font-semibold">Elimination of Data Entry Errors</span>
+                    <h5 class="text-blue-400 font-bold text-sm uppercase">Input Document</h5>
+                    <div class="h-48 rounded bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-500 text-xs italic text-center px-4">
+                        [ PDF Preview: Wells_Fargo_Statement_Jan.pdf ]<br>Total Liabilities: $450,000<br>Net Revenue: $120,000
                     </div>
                 </div>
-            </div>
-            <div class="bg-slate-900 rounded-2xl p-6 shadow-xl text-white font-mono text-sm leading-relaxed">
-                <p class="text-blue-400">// API Response Sample</p>
-                <p class="text-slate-400 mt-2">{</p>
-                <p class="ml-4 italic text-slate-500">"status": "Covenant_Breach_Alert",</p>
-                <p class="ml-4 text-green-400">"extracted_ebitda": 1450000.00,</p>
-                <p class="ml-4 text-green-400">"total_debt": 5200000.00,</p>
-                <p class="ml-4 text-yellow-400">"debt_to_ebitda_ratio": 3.58,</p>
-                <p class="ml-4 text-red-500">"threshold": 3.0,</p>
-                <p class="ml-4 text-red-500">"action_required": true</p>
-                <p class="text-slate-400">}</p>
-            </div>
-        </div>
-
-        <div class="border-t border-slate-200 pt-12">
-            <h3 class="text-center text-xl font-bold text-slate-900 mb-8 uppercase tracking-widest text-sm">How it Works</h3>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="text-3xl mb-4">📥</div>
-                    <h4 class="font-bold mb-2">Ingest</h4>
-                    <p class="text-slate-500 text-sm">Drop PDF bank statements into our secure portal or connect via API.</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl mb-4">🧠</div>
-                    <h4 class="font-bold mb-2">Extract</h4>
-                    <p class="text-slate-500 text-sm">Our AI identifies key-value pairs regardless of document format.</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl mb-4">⚡</div>
-                    <h4 class="font-bold mb-2">Alert</h4>
-                    <p class="text-slate-500 text-sm">Real-time alerts triggered if borrower ratios fall outside of legal bounds.</p>
+                <div class="space-y-4 font-mono text-xs">
+                    <h5 class="text-green-400 font-bold text-sm uppercase font-sans">Output Data</h5>
+                    <div class="p-4 bg-slate-950 rounded text-green-500 border border-green-900/30">
+                        {<br>
+                        &nbsp;&nbsp;"extracted_revenue": 120000,<br>
+                        &nbsp;&nbsp;"leverage_ratio": 3.75,<br>
+                        &nbsp;&nbsp;"covenant_status": <span class="bg-red-900 text-red-200 px-1 italic">"BREACHED"</span>,<br>
+                        &nbsp;&nbsp;"confidence_score": 0.98<br>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        function showTab(tabName) {
-            // Hide all contents
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            // Remove active style from tabs
-            document.querySelectorAll('nav button').forEach(button => {
-                button.classList.remove('active-tab');
-                button.classList.add('text-slate-500');
-            });
+        function toggleView(view) {
+            // Hide all
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // Show selected
+            document.getElementById(view).classList.add('active');
 
-            // Show current tab
-            document.getElementById(tabName).classList.add('active');
-            document.getElementById(tabName + '-tab').classList.add('active-tab');
-            document.getElementById(tabName + '-tab').classList.remove('text-slate-500');
+            // Toggle Buttons
+            const btnReadme = document.getElementById('btn-readme');
+            const btnPitch = document.getElementById('btn-pitch');
+
+            if (view === 'readme') {
+                btnReadme.classList.add('active-btn');
+                btnReadme.classList.remove('text-slate-500');
+                btnPitch.classList.remove('active-btn');
+                btnPitch.classList.add('text-slate-500');
+            } else {
+                btnPitch.classList.add('active-btn');
+                btnPitch.classList.remove('text-slate-500');
+                btnReadme.classList.remove('active-btn');
+                btnReadme.classList.add('text-slate-500');
+            }
         }
     </script>
 </body>
