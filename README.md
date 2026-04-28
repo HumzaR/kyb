@@ -1,22 +1,35 @@
-# KYB Ops Copilot Demo
+# KYB Document Intelligence Demo
 
-A static prototype for the Heron Product Take-Home.
+A static interactive prototype for the Heron Product Take-Home.
 
 ## Concept
 
-KYB Ops Copilot is a workflow automation layer for fintechs that process business documentation. It is designed for teams that use a KYB provider such as Sumsub, but still need help with:
+KYB Document Intelligence is a document analysis product for fintechs that need to process business documentation during onboarding.
+
+It is not positioned as a layer on top of another KYB vendor. The product analyses documentation directly and turns messy documents into structured, verified, operational data.
+
+It helps fintechs with:
 
 - Dynamic document requirements by country, entity type and risk level
-- Upload guardrails to prevent bad documents being submitted
+- Upload guardrails to stop bad documents before submission
 - OCR/extraction and translation of business documentation
 - Verification against government or third-party registries
 - CRM schema creation and field mapping
 - Analyst review packs with evidence, confidence and routing decisions
 - Audit trail and exception handling
 
-## Demo
+## Demo interactions
 
-This is a frontend-only prototype. It simulates OCR and KYB extraction using mock data so the focus stays on workflow design, product thinking and implementation approach.
+The prototype includes:
+
+- Clickable customer pain-point cards
+- Scenario switching for standard KYB, foreign documents and complex ownership
+- Simulated document analysis progress
+- Dynamic upload validation output
+- Extraction and translation output
+- Official source verification output
+- CRM field builder output
+- Final analyst review pack
 
 ## Hosting on GitHub Pages
 
