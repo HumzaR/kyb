@@ -32,6 +32,7 @@ body{background:radial-gradient(circle at 10% 0%,#dbeafe,transparent 32%),radial
       </div>
     </div>
     <nav class="hidden gap-6 text-sm font-semibold text-slate-600 md:flex">
+      <a href="#pitch">Pitch</a>
       <a href="#journey">End-to-end demo</a>
       <a href="#unhappy">Unhappy paths</a>
       <a href="#output">Platform output</a>
@@ -76,6 +77,87 @@ body{background:radial-gradient(circle at 10% 0%,#dbeafe,transparent 32%),radial
             </div>
             <div class="mt-6 rounded-xl bg-slate-100 p-3">The analyst can see exactly which document, page and field produced each value.</div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="pitch" class="py-14">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-8 max-w-4xl">
+        <div class="inline-flex rounded-full bg-slate-950 px-3 py-1 text-xs font-black text-white">Product / engineering pitch</div>
+        <h2 class="mt-4 text-3xl font-black">Why we should build this workflow automation</h2>
+        <p class="mt-3 text-slate-600 leading-7">This section frames the prototype against the Heron take-home brief: the observed workflow, the manual pain, the proposed automation, the MVP scope, and why it is buildable.</p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-[1fr_.9fr]">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">Workflow I observed</h3>
+          <p class="mt-3 text-slate-600 leading-7">In a previous fintech onboarding workflow, business customers submitted company documents as part of KYB and due diligence checks. I saw the process from the product and operations side: documents were reviewed, key company/contact/ownership data was extracted, risk information was captured, and the final data had to be pushed into CRM and case-management systems.</p>
+          <p class="mt-3 text-slate-600 leading-7">The pain was not simply reading documents. The real problem was turning inconsistent, messy business documentation into structured, trusted, operational data that analysts and customer-facing teams could use.</p>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <h3 class="text-2xl font-black">Customer problem</h3>
+          <p class="mt-3 text-sm leading-6 text-slate-300">Startup fintechs need credible KYB workflows, but often do not have large engineering or operations teams to build document intake, OCR, verification, CRM mapping, and analyst review tooling from scratch.</p>
+          <div class="mt-5 space-y-3 text-sm">
+            <div class="rounded-2xl bg-white/10 p-4">Wrong or poor-quality documents cause customer back-and-forth.</div>
+            <div class="rounded-2xl bg-white/10 p-4">Analysts manually copy key fields into CRM and case tools.</div>
+            <div class="rounded-2xl bg-white/10 p-4">Ownership and UBO structures are difficult to interpret consistently.</div>
+            <div class="rounded-2xl bg-white/10 p-4">Teams need evidence, confidence and auditability before trusting automation.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 class="text-2xl font-black">Manual workflow before automation</h3>
+        <div class="mt-5 grid gap-3 md:grid-cols-3">
+          <div class="rounded-2xl bg-slate-50 p-4"><b>1. Business applies</b><p class="mt-1 text-sm text-slate-600">Customer starts onboarding and is asked to submit company documents.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>2. Documents uploaded</b><p class="mt-1 text-sm text-slate-600">Files may be blurry, expired, wrong, missing pages or in another language.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>3. Analyst reviews</b><p class="mt-1 text-sm text-slate-600">Ops/compliance manually checks validity, readability and completeness.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>4. Data extracted</b><p class="mt-1 text-sm text-slate-600">Company name, number, directors, UBOs and addresses are manually captured.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>5. Data verified</b><p class="mt-1 text-sm text-slate-600">Values are compared against registries, policies or other trusted sources.</p></div>
+          <div class="rounded-2xl bg-slate-50 p-4"><b>6. CRM updated</b><p class="mt-1 text-sm text-slate-600">Records, tickets and risk fields are created or updated manually.</p></div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">Proposed solution</h3>
+          <p class="mt-3 text-slate-600 leading-7">Build a KYB Document Intelligence platform that analyses business documentation directly. It validates uploads before submission, extracts and translates key fields, checks data against official sources, creates CRM-ready outputs, and produces an evidence-backed review pack for analysts.</p>
+          <div class="mt-5 rounded-3xl bg-emerald-50 p-5 text-emerald-900"><b>Core idea</b><p class="mt-2 text-sm">Move document issues as far upstream as possible, while giving analysts structured data and evidence when human review is still needed.</p></div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">MVP scope</h3>
+          <div class="mt-4 grid gap-2 text-sm">
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Configurable document checklist</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Upload validation and customer-facing error messages</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Document classification, OCR and extraction</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Translation for non-English documents</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ Registry verification and mismatch handling</div>
+            <div class="rounded-2xl bg-slate-50 p-3">✓ CRM mapping and analyst review pack</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <h3 class="text-2xl font-black">Non-goals for MVP</h3>
+          <div class="mt-4 space-y-3 text-sm text-slate-600">
+            <div class="rounded-2xl border border-slate-200 p-4">Do not fully automate every approval decision from day one.</div>
+            <div class="rounded-2xl border border-slate-200 p-4">Do not support every country, registry and document type immediately.</div>
+            <div class="rounded-2xl border border-slate-200 p-4">Do not replace analysts; keep them in the loop for exceptions and low-confidence cases.</div>
+            <div class="rounded-2xl border border-slate-200 p-4">Do not build heavy custom CRM implementations beyond standard mappings in the first version.</div>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <h3 class="text-2xl font-black">Internal ask</h3>
+          <p class="mt-3 text-sm leading-6 text-slate-300">I would propose we build a prototype around one high-frequency workflow first: UK limited companies onboarding to a startup fintech.</p>
+          <p class="mt-3 text-sm leading-6 text-slate-300">The goal is to prove we can validate uploads, extract core company/UBO fields, verify against registry data, and generate a review pack that is useful enough for operations teams to trust.</p>
+          <div class="mt-5 rounded-3xl bg-white/10 p-4 text-sm">If this works, we can expand by country, entity type, document type and CRM integration.</div>
         </div>
       </div>
     </div>
