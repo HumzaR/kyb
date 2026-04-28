@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KYB Ops Copilot Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass { background: rgba(255,255,255,0.78); backdrop-filter: blur(18px); }
+    .soft-grid { background-image: radial-gradient(#dbeafe 1px, transparent 1px); background-size: 28px 28px; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 soft-grid">
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white font-bold">K</div>
+        <div>
+          <p class="font-semibold leading-tight">KYB Ops Copilot</p>
+          <p class="text-xs text-slate-500">Document automation layer for fintech onboarding</p>
+        </div>
+      </div>
+      <nav class="hidden gap-6 text-sm text-slate-600 md:flex">
+        <a href="#workflow" class="hover:text-slate-900">Workflow</a>
+        <a href="#demo" class="hover:text-slate-900">Demo</a>
+        <a href="#review" class="hover:text-slate-900">Analyst Review</a>
+        <a href="#architecture" class="hover:text-slate-900">Architecture</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div>
+        <div class="mb-5 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-600 shadow-sm">Prototype for Heron Product Take-Home</div>
+        <h1 class="max-w-4xl text-4xl font-bold tracking-tight sm:text-6xl">Turn messy business documents into a clean KYB review pack.</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">A configurable workflow layer for fintechs using Sumsub or similar KYB providers. It guides applicants through document upload, validates files before submission, extracts and reconciles data, creates CRM properties, and gives analysts a clear evidence-backed decision screen.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#demo" class="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800">Open demo flow</a>
+          <a href="#architecture" class="rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-100">View build approach</a>
+        </div>
+      </div>
+
+      <div class="glass rounded-3xl border border-slate-200 p-6 shadow-xl">
+        <div class="mb-5 flex items-center justify-between">
+          <div>
+            <p class="text-sm font-semibold">Applicant</p>
+            <p class="text-2xl font-bold">Northstar Pay Ltd</p>
+          </div>
+          <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700">Manual review</span>
+        </div>
+        <div class="space-y-3">
+          <div class="rounded-2xl border border-slate-200 bg-white p-4"><div class="flex items-center justify-between"><p class="font-medium">Certificate of incorporation</p><span class="text-sm font-semibold text-emerald-600">Verified</span></div><p class="mt-1 text-sm text-slate-500">Company number matched against registry.</p></div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-4"><div class="flex items-center justify-between"><p class="font-medium">Ownership structure</p><span class="text-sm font-semibold text-amber-600">Needs review</span></div><p class="mt-1 text-sm text-slate-500">One shareholder entity requires supporting registry evidence.</p></div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-4"><div class="flex items-center justify-between"><p class="font-medium">Proof of address</p><span class="text-sm font-semibold text-red-600">Rejected</span></div><p class="mt-1 text-sm text-slate-500">Document is older than customer-configured 90-day rule.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="bg-white/80 py-14">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl"><h2 class="text-3xl font-bold">The workflow and pain</h2><p class="mt-4 text-slate-600 leading-7">New fintechs often buy KYB tooling, but still have to stitch together document rules, CRM setup, data reconciliation, analyst queues and customer re-upload loops. The result is slow onboarding, messy HubSpot/Salesforce data, repeated customer outreach and weak auditability.</p></div>
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><p class="text-sm font-semibold text-slate-500">Pain 01</p><h3 class="mt-2 text-xl font-bold">Document requirements vary</h3><p class="mt-3 text-sm leading-6 text-slate-600">Different entity types, countries and risk levels need different documents, expiry rules and guardrails.</p></div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><p class="text-sm font-semibold text-slate-500">Pain 02</p><h3 class="mt-2 text-xl font-bold">CRM data is not ready</h3><p class="mt-3 text-sm leading-6 text-slate-600">Fintechs need properties, objects and associations created before extracted data can be operationalised.</p></div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><p class="text-sm font-semibold text-slate-500">Pain 03</p><h3 class="mt-2 text-xl font-bold">Review is fragmented</h3><p class="mt-3 text-sm leading-6 text-slate-600">Analysts jump between documents, registries, Sumsub, CRM tickets and spreadsheets to make one decision.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="py-14">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><h2 class="text-3xl font-bold">Interactive demo flow</h2><p class="mt-3 max-w-2xl text-slate-600">Click each stage to simulate the KYB document automation journey.</p></div><button id="resetBtn" class="w-fit rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold hover:bg-slate-100">Reset demo</button></div>
+        <div class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]"><div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"><div id="steps" class="space-y-3"></div></div><div id="demoPanel" class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm min-h-[420px]"></div></div>
+      </div>
+    </section>
+
+    <section id="review" class="bg-white/80 py-14">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-8 max-w-3xl"><h2 class="text-3xl font-bold">Analyst review pack</h2><p class="mt-3 text-slate-600 leading-7">The output is not just extracted text. It is an explainable decision workspace with evidence, confidence, rule outcomes and recommended routing.</p></div>
+        <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"><table class="w-full text-left text-sm"><thead class="bg-slate-100 text-slate-600"><tr><th class="px-5 py-4">Field</th><th class="px-5 py-4">Value</th><th class="px-5 py-4">Source</th><th class="px-5 py-4">Confidence</th><th class="px-5 py-4">Status</th></tr></thead><tbody id="reviewRows" class="divide-y divide-slate-100"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="architecture" class="py-14">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl"><h2 class="text-3xl font-bold">Build approach</h2><p class="mt-4 text-slate-600 leading-7">This prototype assumes Sumsub handles the core KYB verification and document reading. The proposed product sits around it as the orchestration, CRM mapping, upload guardrail and review layer.</p></div>
+        <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-bold">1. Intake</h3><p class="mt-2 text-sm leading-6 text-slate-600">Dynamic upload checklist based on country, company type, risk appetite and customer policy.</p></div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-bold">2. Extraction</h3><p class="mt-2 text-sm leading-6 text-slate-600">Pull extracted fields from Sumsub, OCR output or document AI. Translate where required.</p></div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-bold">3. Verification</h3><p class="mt-2 text-sm leading-6 text-slate-600">Compare document values with registries, government sources, sanctions and CRM records.</p></div>
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"><h3 class="font-bold">4. Operations</h3><p class="mt-2 text-sm leading-6 text-slate-600">Create CRM properties, case tickets, associations, audit logs and analyst review tasks.</p></div>
+        </div>
+        <div class="mt-8 rounded-3xl border border-slate-200 bg-slate-900 p-6 text-white shadow-sm"><h3 class="text-xl font-bold">Technical components</h3><div class="mt-5 grid gap-4 md:grid-cols-2"><div class="rounded-2xl bg-white/10 p-4"><p class="font-semibold">Config/rules engine</p><p class="mt-1 text-sm text-slate-300">Defines accepted document types, expiry windows, required fields, risk triggers and routing logic.</p></div><div class="rounded-2xl bg-white/10 p-4"><p class="font-semibold">CRM schema builder</p><p class="mt-1 text-sm text-slate-300">Creates and maps company, contact, UBO, group company and ticket properties.</p></div><div class="rounded-2xl bg-white/10 p-4"><p class="font-semibold">Verification connectors</p><p class="mt-1 text-sm text-slate-300">Connects to Sumsub, Companies House or local registries and stores source-of-truth decisions.</p></div><div class="rounded-2xl bg-white/10 p-4"><p class="font-semibold">Evidence/audit layer</p><p class="mt-1 text-sm text-slate-300">Shows field-level evidence, confidence, overrides, analyst notes and final decision history.</p></div></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-8"><div class="mx-auto max-w-7xl px-6 text-sm text-slate-500">Demo note: this prototype simulates OCR/KYB extraction using mock data. It is designed to communicate workflow, product thinking and implementation approach.</div></footer>
+
+  <script>
+    const steps = [
+      { title: '1. Configure customer rules', status: 'Rules ready', body: `<h3 class="text-2xl font-bold">Customer guardrails</h3><p class="mt-3 text-slate-600">The fintech configures what documents are accepted before any applicant uploads files.</p><div class="mt-5 grid gap-3"><div class="rounded-2xl bg-slate-100 p-4"><b>UK Limited Company</b><br><span class="text-sm text-slate-600">Certificate of incorporation, company number, directors, UBO declaration.</span></div><div class="rounded-2xl bg-slate-100 p-4"><b>High-risk industry</b><br><span class="text-sm text-slate-600">Enhanced due diligence, source of funds and compliance approval required.</span></div><div class="rounded-2xl bg-slate-100 p-4"><b>Proof of address</b><br><span class="text-sm text-slate-600">Must be dated within 90 days and match registered address.</span></div></div>` },
+      { title: '2. Validate upload before submission', status: '2 issues found', body: `<h3 class="text-2xl font-bold">Upload guardrails</h3><p class="mt-3 text-slate-600">The portal checks documents immediately so the fintech does not need to chase the applicant later.</p><div class="mt-5 space-y-3"><div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800">✓ Certificate detected and readable</div><div class="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-800">! Ownership chart missing one shareholder entity document</div><div class="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-800">× Proof of address is older than 90 days</div></div>` },
+      { title: '3. Extract and translate data', status: 'Fields extracted', body: `<h3 class="text-2xl font-bold">OCR + translation output</h3><p class="mt-3 text-slate-600">Documents are classified, translated where required and converted into structured fields.</p><div class="mt-5 overflow-hidden rounded-2xl border border-slate-200"><table class="w-full text-sm"><tbody class="divide-y divide-slate-100"><tr><td class="p-3 font-medium">Company name</td><td class="p-3">Northstar Pay Ltd</td></tr><tr><td class="p-3 font-medium">Registration no.</td><td class="p-3">12884591</td></tr><tr><td class="p-3 font-medium">Director</td><td class="p-3">Amara Hussain</td></tr><tr><td class="p-3 font-medium">UBO</td><td class="p-3">Amara Hussain, 63%</td></tr><tr><td class="p-3 font-medium">Translated field</td><td class="p-3">Registered office address</td></tr></tbody></table></div>` },
+      { title: '4. Verify against registries', status: 'Registry matched', body: `<h3 class="text-2xl font-bold">Verification checks</h3><p class="mt-3 text-slate-600">Extracted values are compared against government or third-party data sources. Registry values become source of truth where conflicts appear.</p><div class="mt-5 space-y-3"><div class="rounded-2xl bg-emerald-50 p-4 text-emerald-800">✓ Company number matches Companies House</div><div class="rounded-2xl bg-emerald-50 p-4 text-emerald-800">✓ Director name matches registry</div><div class="rounded-2xl bg-amber-50 p-4 text-amber-800">! Trading address differs from registered address</div><div class="rounded-2xl bg-amber-50 p-4 text-amber-800">! Ownership chain incomplete for parent entity</div></div>` },
+      { title: '5. Build CRM output', status: 'Schema mapped', body: `<h3 class="text-2xl font-bold">CRM schema builder</h3><p class="mt-3 text-slate-600">The system detects missing CRM properties and prepares the data model needed for operations.</p><div class="mt-5 grid gap-3"><div class="rounded-2xl bg-slate-100 p-4"><b>Company record</b><br><span class="text-sm text-slate-600">sumsub_id, entity_type, registration_number, jurisdiction, risk_rating</span></div><div class="rounded-2xl bg-slate-100 p-4"><b>Contact records</b><br><span class="text-sm text-slate-600">contact_number, role, ownership_percentage, screening_status</span></div><div class="rounded-2xl bg-slate-100 p-4"><b>KYB ticket</b><br><span class="text-sm text-slate-600">case_status, missing_docs, analyst_queue, decision_notes</span></div></div>` },
+      { title: '6. Route decision', status: 'Escalate', body: `<h3 class="text-2xl font-bold">Recommended outcome</h3><p class="mt-3 text-slate-600">The case is routed based on configured rules, not a black-box decision.</p><div class="mt-5 rounded-3xl border border-amber-200 bg-amber-50 p-5"><p class="text-lg font-bold text-amber-900">Escalate to KYB analyst</p><ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-amber-900"><li>Missing parent entity evidence</li><li>Proof of address expired</li><li>Trading address mismatch requires note</li></ul></div><div class="mt-5 flex flex-wrap gap-3"><button class="rounded-2xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white">Approve</button><button class="rounded-2xl bg-white border border-slate-300 px-4 py-2 text-sm font-semibold">Request info</button><button class="rounded-2xl bg-white border border-slate-300 px-4 py-2 text-sm font-semibold">Escalate</button></div>` }
+    ];
+    const reviewData = [['Company name','Northstar Pay Ltd','Certificate, page 1 + registry','97%','Matched'],['Company number','12884591','Government registry','99%','Verified'],['Director','Amara Hussain','Registry + ID document','94%','Matched'],['UBO','Amara Hussain, 63%','Ownership chart, page 2','86%','Needs review'],['Proof of address','12 Market Street, London','Utility bill','72%','Rejected - expired'],['Risk outcome','Medium / manual review','Rules engine','N/A','Escalate']];
+    let activeStep = 0;
+    function renderSteps(){document.getElementById('steps').innerHTML=steps.map((step,index)=>`<button onclick="setStep(${index})" class="w-full rounded-2xl border p-4 text-left transition ${index===activeStep?'border-slate-900 bg-slate-900 text-white':'border-slate-200 bg-white hover:bg-slate-50'}"><div class="flex items-center justify-between gap-3"><p class="font-semibold">${step.title}</p><span class="rounded-full ${index===activeStep?'bg-white/15 text-white':'bg-slate-100 text-slate-600'} px-3 py-1 text-xs font-semibold">${step.status}</span></div></button>`).join('')}
+    function renderPanel(){document.getElementById('demoPanel').innerHTML=steps[activeStep].body}
+    function setStep(index){activeStep=index;renderSteps();renderPanel()}
+    function renderReviewRows(){document.getElementById('reviewRows').innerHTML=reviewData.map(row=>{const status=row[4];const badgeClass=status.includes('Verified')||status.includes('Matched')?'bg-emerald-100 text-emerald-700':status.includes('Rejected')||status.includes('Escalate')||status.includes('review')?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-600';return `<tr><td class="px-5 py-4 font-medium">${row[0]}</td><td class="px-5 py-4">${row[1]}</td><td class="px-5 py-4 text-slate-600">${row[2]}</td><td class="px-5 py-4">${row[3]}</td><td class="px-5 py-4"><span class="rounded-full px-3 py-1 text-xs font-semibold ${badgeClass}">${row[4]}</span></td></tr>`}).join('')}
+    document.getElementById('resetBtn').addEventListener('click',()=>setStep(0));renderSteps();renderPanel();renderReviewRows();
+  </script>
+</body>
+</html>
